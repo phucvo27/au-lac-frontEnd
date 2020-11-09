@@ -1,6 +1,9 @@
 @import './variables/variables.scss';
 @import './util/util.scss';
+@import './pages//products.scss';
+@import './pages//productDetail.scss';
 @import './components/Header.scss';
+@import './components/Product.scss';
 
 * {
     padding: 0;

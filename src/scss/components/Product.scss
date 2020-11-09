@@ -1,0 +1,64 @@
+.product {
+    width: 20%;
+    margin: 2rem;
+    padding: 1rem;
+    transition: all .4s;
+    border-radius: .5rem;
+    &__image {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 24rem;
+        img {
+            
+            max-height: 100%;
+            max-width: 14rem;
+            transition: all .4s;
+        }
+    }
+    &__actions{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 0;
+        i {
+            color: #ccc;
+            cursor: pointer;
+            transition: color .2s;
+            &:hover, &.active {
+                color: $color-red
+            }
+        }
+    }
+    &__name{
+        a {
+            color: #000;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color .3s;
+            &:hover {
+                color: $color-primary;
+                
+            }
+        }
+        
+    }
+    &__price {
+        color: #bf2718;
+        font-size: 1.6rem;
+        font-weight: bold;
+
+    }
+
+    &:hover {
+        box-shadow: 1rem 2rem 4rem rgba(0, 0, 0, 0.1);
+        transform: translateY(-1rem);
+        
+        img {
+            transform: scale(1.05)
+        }
+    }
+}

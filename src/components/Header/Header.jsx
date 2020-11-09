@@ -26,7 +26,7 @@ const Header = () => {
             </div>
             <div className="container header__center">
                 <div className="header__center__cart">
-                    <p>Cart</p>
+                    <p>Cart: 0</p>
                 </div>
                 <div className="header__center__logo">
                     <img src="https://aulacshop.com/assets/img/logo.png" alt="au-lac-shop" />
