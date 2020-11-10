@@ -1,7 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
+    console.log(props)
+    const goToOrder = ()=>{
+        props.history.push('/orders')
+    }
     return (
         <header className="header">
             <div className="header__top">
@@ -25,8 +29,11 @@ const Header = () => {
                 </div>
             </div>
             <div className="container header__center">
-                <div className="header__center__cart">
-                    <p>Cart: 0</p>
+                <div onClick={goToOrder} className="header__center__cart">
+                    <span>
+                        <i className="fas fa-cart-plus active"></i> 
+                    </span>
+                    <span>: 0</span>
                 </div>
                 <div className="header__center__logo">
                     <img src="https://aulacshop.com/assets/img/logo.png" alt="au-lac-shop" />
@@ -44,4 +51,4 @@ const Header = () => {
 }
 
 
-export default Header;
+export default withRouter(Header);

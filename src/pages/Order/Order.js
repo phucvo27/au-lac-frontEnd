@@ -1,9 +1,16 @@
 import React from 'react';
-
-const Home = () => {
+import Table from '../../components/Table/Table.jsx'
+const Order = (props) => {
+    console.log(props)
     return (
-        <h1>This is Hompage</h1>
+        <section className="container pt-10">
+            <h1>Items on Cart</h1>
+            <Table />
+            <div>
+                <button onClick={()=>{props.history.push('/checkout')}}>Check Out</button>
+            </div>
+        </section>
     )
 };
 
-export default Home;
+export default Order;

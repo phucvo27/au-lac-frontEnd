@@ -1,9 +1,12 @@
 @import './variables/variables.scss';
 @import './util/util.scss';
-@import './pages//products.scss';
-@import './pages//productDetail.scss';
+@import './pages/products.scss';
+@import './pages/productDetail.scss';
+@import './pages/checkout.scss';
 @import './components/Header.scss';
 @import './components/Product.scss';
+@import './components/Table.scss';
+@import './components/InputGroup.scss';
 
 * {
     padding: 0;
