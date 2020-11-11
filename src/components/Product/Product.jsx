@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { cartItemsVar } from '../../graphql/cache';
 const Product = (props) => {
+    const addToCart = ()=>{
+        console.log("Clicked add button")
+        const currentCarts = cartItemsVar();
+        localStorage.setItem('carts', JSON.stringify([...currentCarts, props.product]));
+        cartItemsVar([...cartItemsVar(), props.product])
+    }
     const { imgUrl, name, price} = props.product;
     return (
         <div className="product">
@@ -10,8 +17,8 @@ const Product = (props) => {
                 </div>
             </Link>
             <div className="product__actions">
-                <div className="product__action--cart">
-                    <i className="fas fa-cart-plus active"></i>
+                <div onClick={addToCart} className="product__action--cart">
+                    <i className="fas fa-cart-plus"></i>
                 </div>
                 <div className="product__action--like">
                     <i className="fas fa-heart"></i>

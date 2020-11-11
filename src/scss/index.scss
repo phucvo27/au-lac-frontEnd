@@ -3,7 +3,8 @@
 @import './pages/products.scss';
 @import './pages/productDetail.scss';
 @import './pages/checkout.scss';
-@import './components/Header.scss';
+@import './components/Header-2.scss';
+@import './components/HomeSlider.scss';
 @import './components/Product.scss';
 @import './components/Table.scss';
 @import './components/InputGroup.scss';
@@ -20,10 +21,15 @@ html {
 body {
     font-size: 1.6rem;
     line-height: 1.7;
-    color: #333
+    color: #333;
+    background-color: #f2f4ec;
+    background-image: url("../assets/bg-body.png");
+    background-position: center top;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
 }
-
-.container {
+.container, #root {
     width: 120rem;
     margin: 0 auto;
 }

@@ -1,0 +1,34 @@
+/*======GLOBAL STYLE========*/
+:root {
+  --color-orange: #F6A64D;
+  --color-green: #8BA73B;
+  --color-highlight: rgb(139,167,59);
+  --color-text: #626262;
+  --color-border: #edecec;
+  --color-backcolor-icon: #f2f4ec;
+  --border: .1rem solid var(--color-border)
+}
+.highlight-text {
+  color: var(--color-highlight);
+}
+/*======END GLOBAL STYLE========*/
+.products__header__sub-title {
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  span {
+    padding: .5rem 2.5rem;
+    margin-right: 1rem;
+    font-size: 1.4rem;
+    background-color: #fff;
+    border-radius: 5rem;
+  }
+}
+.products__header__title {
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+}

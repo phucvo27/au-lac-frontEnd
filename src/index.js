@@ -3,10 +3,49 @@ import ReactDOM from 'react-dom';
 import './scss/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// Setup GraphQL
 
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { cartItemsVar } from './graphql/cache';
+import { GET_CART_ITEMS } from './graphql/Cart'
+import { typeDefs, resolvers } from './graphql/resolvers'
+const link = createHttpLink({
+    uri: "http://54.254.210.233:1345/graphql"
+})
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        cartItems: {
+          read() {
+            
+            return cartItemsVar();
+          }
+        }
+      }
+    }
+  }
+});
+const client = new ApolloClient({
+    link,
+    cache,
+    typeDefs,
+    resolvers
+})
+
+// client.writeQuery({
+//     query: GET_CART_ITEMS,
+//     data: {
+//         cartItems: localStorage.getItem('carts')
+//     }
+// })
+// cache.writeData()
+console.log(client.cache);
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

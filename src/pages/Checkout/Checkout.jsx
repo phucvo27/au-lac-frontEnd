@@ -6,7 +6,7 @@ class Checkout extends React.Component {
     render(){
         return (
             <div className="container pt-10">
-                <h1>This is Checkout Page</h1>
+                <h1>Checkout Page</h1>
                 <form className="form__checkout pt-5">
                     <InputGroup 
                         type="text"

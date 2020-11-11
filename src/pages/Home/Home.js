@@ -1,5 +1,6 @@
 import React from 'react';
-import Product from '../../components/Product/Product.jsx'
+import Product from '../../components/Product/Product.jsx';
+import HomeSlider from '../../components/HomeSlider/HomeSlider.jsx'
 const Home = () => {
 
     const fakeData = [
@@ -38,7 +39,8 @@ const Home = () => {
         return fakeData.map((product, idx) => <Product product={product} key={idx} />)
     }
     return (
-        <section className="container pt-10">
+        <section className="container">
+            <HomeSlider />
             <h1>Our Products</h1>
             <div className="products__list">
                 {renderProducts()}

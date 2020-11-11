@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-
+import { cartItemsVar } from '../../graphql/cache';
+import { useReactiveVar } from '@apollo/client'
 const Header = (props) => {
     console.log(props)
     const goToOrder = ()=>{
         props.history.push('/orders')
     }
+    const itemOnCart = useReactiveVar(cartItemsVar)
     return (
         <header className="header">
             <div className="header__top">
@@ -33,7 +35,7 @@ const Header = (props) => {
                     <span>
                         <i className="fas fa-cart-plus active"></i> 
                     </span>
-                    <span>: 0</span>
+                    <span>: {itemOnCart.length}</span>
                 </div>
                 <div className="header__center__logo">
                     <img src="https://aulacshop.com/assets/img/logo.png" alt="au-lac-shop" />
