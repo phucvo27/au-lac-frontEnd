@@ -1,12 +1,10 @@
 import React from "react";
-import './ProductsCategory.styled.scss';
 import {Link} from "react-router-dom";
 
 const ProductsCategory = () => {
     const categoryData = [
-        'Bread & Pastries' ,'Breakfast & Cereal','Dried Fruits',
-        'Fast Food','Fresh Meat','Fruits & Veges','Fruits Juice',
-        'Milk & Cream','Uncategorized','Vegetables  '
+        'Giải Khát' ,'Hàng Lạnh','Hàng Lon',
+        'Hàng Khô','Tiệt Trùng','Ăn Liền','Gia Vị',
     ];
     const renderCategoryItem = () => {
         return categoryData.map((category, idx) => {
@@ -23,7 +21,7 @@ const ProductsCategory = () => {
     return (
         <div className="products__category__container">
             <div className="products__category__header">
-                <h2>PRODUCTS CATEGORIES</h2>
+                <h2>Danh Mục Sản Phẩm</h2>
             </div>
             <div className="products__category__body">
                 <ul className="products__category__list">

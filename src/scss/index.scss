@@ -8,7 +8,8 @@
 @import './components/Product.scss';
 @import './components/Table.scss';
 @import './components/InputGroup.scss';
-
+@import './components//ProductDetail/ProductDetail.scss';
+@import './components/ProductCategory.scss';
 * {
     padding: 0;
     margin: 0;
@@ -19,6 +20,7 @@ html {
     font-size: 62.5%;
 }
 body {
+    font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
     line-height: 1.7;
     color: #333;
@@ -30,6 +32,6 @@ body {
     background-attachment: scroll;
 }
 .container, #root {
-    width: 120rem;
-    margin: 0 auto;
+    width: 128rem;
+    margin: 5rem auto;
 }

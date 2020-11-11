@@ -8,12 +8,12 @@ const Product = (props) => {
         localStorage.setItem('carts', JSON.stringify([...currentCarts, props.product]));
         cartItemsVar([...cartItemsVar(), props.product])
     }
-    const { imgUrl, name, price} = props.product;
+    const { id, image, name, price} = props.product;
     return (
         <div className="product">
-             <Link to={`/product/${name}`}>
+             <Link to={`/product/${id}`}>
                 <div className="product__image">
-                    <img src={imgUrl} alt={name}/>
+                    <img src={image} alt={name}/>
                 </div>
             </Link>
             <div className="product__actions">
@@ -31,7 +31,7 @@ const Product = (props) => {
                 </div>
             </div>
             <div className="product__name text-center">
-                <Link to={`/product/${name}`}>
+                <Link to={`/product/${id}`}>
                     <h5>{name}</h5>
                 </Link>
             </div>

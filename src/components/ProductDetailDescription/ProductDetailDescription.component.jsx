@@ -1,5 +1,5 @@
 import React from "react";
-import './ProductDetailDescription.styled.scss';
+//import './ProductDetailDescription.styled.scss';
 
 class ProductDetailDescription extends React.Component {
     constructor(props) {

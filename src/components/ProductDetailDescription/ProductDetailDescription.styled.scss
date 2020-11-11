@@ -9,7 +9,7 @@
   --border: .1rem solid var(--color-border)
 }
 .highlight-text {
-  color: var(--color-highlight);
+  color: $color-primary;
 }
 
 @mixin body-description-styles {
@@ -21,9 +21,9 @@
 }
 
 @mixin selected-tab-style {
-  color: var(--color-highlight);
+  color: $color-primary;
   cursor: pointer;
-  border-bottom: 2px solid var(--color-highlight);
+  border-bottom: 2px solid $color-primary;
 }
 
 .selected--tab--header {
@@ -88,9 +88,6 @@
           color: #000;
         }
 
-        td {
-
-        }
       }
 
       tr:nth-child(odd) {

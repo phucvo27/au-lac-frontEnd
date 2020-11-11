@@ -1,18 +1,19 @@
 import React from "react";
-import './ProductDetail.styled.scss';
+// import './ProductDetail.styled.scss';
 // import {addCart} from "../../redux/cart/cart.action";
 
 import productImg_1 from './../../assets/products/seafood-1.jpg';
 import productImg_2 from './../../assets/products/seafood-2.jpg';
 import productImg_3 from './../../assets/products/seafood-3.jpg';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
+import fakeData from '../../data/fake-data'
 //import productImg_4 from './../../assets/products/seafood-4.jpg';
 
 class ProductDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: props.product,
+            product: {},
             images: [
                 productImg_1, productImg_2,
                 productImg_3
@@ -25,26 +26,30 @@ class ProductDetail extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0,0);
+        const id = this.props.match.params.id;
+        const currentProduct = fakeData.find(p => p.id === id);
+        console.log(currentProduct)
+        this.setState(()=>({product: currentProduct}))
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.product.id !== prevState.product.id) {
-            return {
-                product: nextProps.product
-            }
-        }
-        return null;
-    }
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     if(nextProps.product.id !== prevState.product.id) {
+    //         return {
+    //             product: nextProps.product
+    //         }
+    //     }
+    //     return null;
+    // }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.product.id !== this.state.product.id) {
-            this.setState(() => {
-                return {
-                    product: prevProps.product
-                }
-            })
-        }
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if(prevProps.product.id !== this.state.product.id) {
+    //         this.setState(() => {
+    //             return {
+    //                 product: prevProps.product
+    //             }
+    //         })
+    //     }
+    // }
 
     addProductCart = (product) => {
         let {cart} = this.props;
@@ -80,20 +85,20 @@ class ProductDetail extends React.Component {
     }
 
     renderProductDetailQuantity = () => {
-        let {productCart} = this.state;
-        let {cart} = this.props;
-        cart = []
-        productCart = []
+        let {product} = this.state;
+        //let {cart} = this.props;
+        // cart = []
+        // productCart = []
         return (
             <div className="content__quantity--item">
                 <div className="quantity__item__img">
-                    <img src={`https://aulacshop.com/uploads/img/1595648257_1595411793_BAO%20TU%20CHAY.jpg`} alt={`Quantity 1`}/>
+                    <img src={product.image} alt={`Quantity 1`}/>
                 </div>
                 <div className="quantity__item__name">
-                    <Link to="#">{'Absolute organic butter unsalted'}</Link>
+                    <Link to="#">{product.name}</Link>
                 </div>
                 <div className="quantity__item__price">
-                    <span>${150}</span>
+                    <span>{product.price}đ</span>
                 </div>
                 <div className="quantity__item__action">
                     <span
@@ -168,7 +173,7 @@ class ProductDetail extends React.Component {
                 <div className="product-detail__image">
                     <div className="product-detail__image--img">
                         {/* <img src={product.image} alt="Product Detail"/> */}
-                        <img src={'https://aulacshop.com/uploads/img/1595648257_1595411793_BAO%20TU%20CHAY.jpg'} alt="Product Detail"/>
+                        <img src={product.image} alt="Product Detail"/>
                     </div>
                     <div className="product-detail__image--img-slider">
                         {this.renderImageSlider()}
@@ -181,11 +186,12 @@ class ProductDetail extends React.Component {
                         </div>
                         <div className="product-detail__content__rating" style={{display: 'none'}}/>
                         <div className="product-detail__content__price">
-                            <span>${product.price}</span>
+                            <span>{product.price}đ</span>
                         </div>
                         <div className="product-detail__content__description">
                             <p>
-                                {product.description}
+                                {/* {product.description} */}
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus dolor, soluta officiis unde modi magnam hic sunt dolorum veritatis ut totam amet exercitationem. Voluptates veniam omnis fugit assumenda odio. Modi?
                             </p>
                         </div>
                     </div>
@@ -252,4 +258,4 @@ class ProductDetail extends React.Component {
 }
 
 
-export default ProductDetail
+export default withRouter(ProductDetail)

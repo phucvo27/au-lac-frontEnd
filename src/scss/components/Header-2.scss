@@ -8,7 +8,7 @@
     --border: .1rem solid var(--color-border)
   }
   .highlight-text {
-    color: var(--color-highlight);
+    color: $color-primary;
   }
   .logo {
     height: 4.4rem;
@@ -31,7 +31,7 @@
   }
   
   input:focus {
-    border: .2rem solid var(--color-highlight);
+    border: .2rem solid $color-primary;
     transition: .3s;
   }
   
@@ -113,7 +113,7 @@
   }
   
   .header__offer--location:hover {
-    color: var(--color-highlight);
+    color: $color-primary;
     transition: .3s;
     cursor: pointer;
   }
@@ -130,6 +130,7 @@
     justify-content: flex-start;
     align-items: center;
     border-top: var(--border);
+    padding: 2rem 0;
   }
   
   .header__user__logo {
@@ -137,14 +138,13 @@
     //width: 29rem;
     width: 20%;
     height: 11.4rem;
-    padding-left: 1.6rem;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   
   .header__user__logo img {
-    height: 4.4rem;
-    width: 19.2rem;
+    width: 10.2rem
   }
   
   .header__user__search {
@@ -200,7 +200,7 @@
   }
   
   .header__user__action--login:hover i, .header__user__action--login:hover p {
-    color: var(--color-highlight);
+    color: $color-primary;
     transition: .3s;
     cursor: pointer;
   }
@@ -214,7 +214,7 @@
     background-color: #fff;
     opacity: 0;
     visibility: hidden;
-    border-top: .4rem solid var(--color-highlight);
+    border-top: .4rem solid $color-primary;
     transition: .5s;
     z-index: 1;
   }
@@ -241,7 +241,7 @@
   .login__form--header a {
     text-decoration: none;
     font-size: 1.3rem;
-    color: var(--color-highlight);
+    color: $color-primary;
   }
   
   .login__form--header a:hover {
@@ -270,7 +270,7 @@
     font-weight: bold;
     width: 100%;
     border: none;
-    background-color: var(--color-highlight);
+    background-color: $color-primary;
     border-radius: 5rem;
   }
   
@@ -280,7 +280,7 @@
   
   .login__form--action a {
     text-decoration: none;
-    color: var(--color-highlight);
+    color: $color-primary;
     font-size: 1.4rem;
   }
   
@@ -297,7 +297,7 @@
   
   .header__user__action--wishlist:hover {
     cursor: pointer;
-    color: var(--color-highlight);
+    color: $color-primary;
     transition: .5s;
   }
   
@@ -320,7 +320,7 @@
   
     .cart__checkout__container {
       background-color: #fff;
-      border-top: .5rem solid var(--color-highlight);
+      border-top: .5rem solid $color-primary;
       width: 280%;
       padding: 1rem;
       display: none;
@@ -369,14 +369,6 @@
         margin-top: 1rem;
         padding-top: 1rem;
         border-top: .1rem solid #000;
-  
-        .cart__product__total--label {
-  
-        }
-  
-        .cart__product__total--price {
-  
-        }
       }
     }
   }
@@ -386,7 +378,7 @@
   }
   
   .header__user__action--cart .notification {
-    background-color: var(--color-green);
+    background-color: $color-primary;
     position: absolute;
     top: 0;
     left: 22%;
@@ -418,7 +410,7 @@
     /* width: 22rem; */
     height: 8rem;
     padding: .8rem 2rem;
-    background-color: var(--color-green);
+    background-color: $color-primary;
     color: #fff;
     font-weight: bold;
     font-size: 1.5rem;
@@ -478,7 +470,7 @@
   }
   
   .nav__category--list a:hover {
-    color: var(--color-highlight);
+    color: $color-primary;
     transition: .5s;
   }
   /*END Category Nav List*/
@@ -523,32 +515,34 @@
   
   .nav__navigation {
     /* padding: 0 4rem; */
-    width: 60%;
+    width: 62%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
   .nav__navigation ul {
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     list-style-type: none;
   }
   
   .nav__navigation li {
     height: 4rem;
-    width: 9rem;
+    // width: 9rem;
     //padding: 1rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-right: 3rem;
   }
   
   .nav__navigation a {
     text-decoration: none;
-    font-size: 1.6rem;
-    color: var(--color-text);
+    font-size: 1.4rem;
+    color: $color-text;
     font-weight: bold;
   }
   
@@ -573,12 +567,12 @@
   }
   
   .nav__contact:hover {
-    color: var(--color-highlight);
+    color: $color-primary;
     transition: .5s;
   }
   
   .nav__contact i {
-    color: var(--color-highlight);
+    color: $color-primary;
     margin-right: 1.8rem;
   }
   
@@ -934,7 +928,7 @@
     }
   
     .header__user__action--phone i:hover {
-      color: var(--color-highlight);
+      color: $color-primary;
       transition: .3s;
     }
   
@@ -967,7 +961,7 @@
     }
   
     .action__phone__dropdown span:hover {
-      color: var(--color-highlight);
+      color: $color-primary;
       transition: .3s;
     }
   

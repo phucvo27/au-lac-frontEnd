@@ -1,5 +1,5 @@
 import React from 'react';
-import {ReactComponent as Logo} from '../../assets/footer/logo.svg'
+//import {ReactComponent as Logo} from '../../assets/footer/logo.svg'
 import {Link} from "react-router-dom";
 
 
@@ -19,9 +19,9 @@ class Header extends React.Component {
     // Mode 1: get price
     getTotalQuantityAndPrice = (mode) => {
         //const cart = this.props.cart;
-        const cart = window.localStorage.getItem('cart')
-            ? JSON.parse(window.localStorage.getItem('cart'))
-            : this.props.cart;
+        // const cart = window.localStorage.getItem('cart')
+        //     ? JSON.parse(window.localStorage.getItem('cart'))
+        //     : this.props.cart;
 
         return mode === 0
             ? [].reduce((total, product) => total + product.quantity, 0)
@@ -110,7 +110,8 @@ class Header extends React.Component {
                     </div>
                     <div className="header__user">
                         <div className="header__user__logo">
-                            <Logo className="logo"/>
+                            {/* <Logo className="logo"/> */}
+                            <img src="https://aulacshop.com/assets/img/logo.png" alt="logo" />
                         </div>
                         <div className="header__user__search">
                             <form action="#">
@@ -222,114 +223,53 @@ class Header extends React.Component {
                             <div className="nav__category--list">
                                 <ul>
                                     <li className="nav__category--item">
-                                        <Link to="#">Milk & Cream</Link>
-                                        <div className="sub__category">
-                                            <div className="sub__category--item">
-                                                <h4>SALADS</h4>
-                                                <ul>
-                                                    <li>
-                                                        <Link to="#">Eggs</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Fruits</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Vegetable</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Bread</Link>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div className="sub__category--item">
-                                                <h4>BEANS</h4>
-                                                <ul>
-                                                    <li>
-                                                        <Link to="#">Vegetable</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Bread</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Eggs</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Fish & Meats</Link>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div className="sub__category--item">
-                                                <h4>FAST FOODS</h4>
-                                                <ul>
-                                                    <li>
-                                                        <Link to="#">Fish & Meats</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Bread</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Fruits</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="#">Saldas</Link>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <Link to="#">Giải Khát</Link>
                                     </li>
                                     <li className="nav__category--item">
-                                        <Link to="#">Fruits & Veges</Link>
+                                        <Link to="#">Hàng Lạnh</Link>
                                     </li>
                                     <li className="nav__category--item">
-                                        <Link to="#">Uncategorized</Link>
+                                        <Link to="#">Hàng Lon</Link>
                                     </li>
                                     <li className="nav__category--item">
-                                        <Link to="#">Fruits Juice</Link>
+                                        <Link to="#">Hàng Khô</Link>
                                     </li>
                                     <li className="nav__category--item">
-                                        <Link to="#">Fast Food</Link>
+                                        <Link to="#">Tiệt Trùng</Link>
                                     </li>
                                     <li className="nav__category--item">
-                                        <Link to="#">Breakfast & Cereal</Link>
+                                        <Link to="#">Ăn Liền</Link>
 
                                     </li>
                                     <li className="nav__category--item">
-                                        <Link to="#">Dried Fruits</Link>
+                                        <Link to="#">Gia Vị</Link>
                                     </li>
-                                    <li>
-                                        <Link to="#">Fresh Meat</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Bread & Pastries</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Vegetables</Link>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
                         <div className="nav__navigation">
                             <ul>
                                 <li>
-                                    <Link to="/">Home</Link>
+                                    <Link to="/">Trang Chủ</Link>
                                 </li>
                                 <li>
-                                    <Link to="/product">Shop</Link>
+                                    <Link to="/products">Sản Phẩm</Link>
                                 </li>
                                 <li>
-                                    <Link to="#">Pages</Link>
+                                    <Link to="#">Tin Tức</Link>
                                 </li>
                                 <li>
-                                    <Link to="/blogs">Blog</Link>
+                                    <Link to="/blogs">Thư Viện</Link>
                                 </li>
                                 <li>
-                                    <Link to="#">On Sale</Link>
+                                    <Link to="#">Công Thức</Link>
                                 </li>
                                 <li>
-                                    <Link to="/about-us">About Us</Link>
+                                    <Link to="/about-us">Hệ Thống Phản Hồi</Link>
                                 </li>
                                 <li>
-                                    <Link to="contact">Contact</Link>
+                                    <Link to="contact">Về Chúng Tôi</Link>
                                 </li>
                             </ul>
                         </div>
