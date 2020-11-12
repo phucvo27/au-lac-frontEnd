@@ -12,8 +12,32 @@ import { typeDefs, resolvers } from './graphql/resolvers'
 const link = createHttpLink({
     uri: "http://54.254.210.233:1345/graphql"
 })
-const cache = new InMemoryCache({
-  typePolicies: {
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+    link,
+    cache,
+    typeDefs,
+    resolvers
+})
+let oldCart = localStorage.getItem('cartItems');
+oldCart = oldCart ? JSON.parse(oldCart) : {}
+client.writeQuery({
+    query: GET_CART_ITEMS,
+    data: {
+        cartItems: oldCart
+    }
+})
+
+ReactDOM.render(
+  <React.StrictMode>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+/*
+typePolicies: {
     Query: {
       fields: {
         cartItems: {
@@ -29,32 +53,7 @@ const cache = new InMemoryCache({
         }
       }
     }
-  }
-});
-const client = new ApolloClient({
-    link,
-    cache,
-    typeDefs,
-    resolvers
-})
-
-// client.writeQuery({
-//     query: GET_CART_ITEMS,
-//     data: {
-//         cartItems: localStorage.getItem('carts')
-//     }
-// })
-// cache.writeData()
-console.log(client.cache);
-ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
+  } */
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

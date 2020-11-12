@@ -15,7 +15,7 @@ const Product = (props) => {
             </Link>
             <div className="product__actions">
                 <div onClick={addToCart} className="product__action--cart">
-                    <i className="fas fa-cart-plus"></i>
+                    <i className={props.isInCart ? `fas fa-cart-plus active`: 'fas fa-cart-plus'}></i>
                 </div>
                 <div className="product__action--like">
                     <i className="fas fa-heart"></i>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Product from "../Product/Product";
+import Product from "../Product/Product.container";
 import fakeData from '../../data/fake-data'
 
 class ProductsList extends React.Component {

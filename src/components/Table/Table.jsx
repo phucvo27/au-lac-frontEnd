@@ -1,7 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Table = () => {
+const Table = (props) => {
+    const { cartItems } = props;
+    const cart = Object.keys(cartItems);
+    const renderTableContent = () =>{
+        if(cart.length > 0 ){
+            return cart.map(key => (
+                <tr key={key}>
+                    <td className="table-remove"><button><i className="fa fa-trash"></i></button></td>
+                    <td className="table-image">
+                        <Link to={`/product/${key}`}>
+                            <img src={cartItems[key].image} alt={cartItems[key].name} />
+                        </Link>
+                    </td>
+                    <td className="table-p-name"><Link to={`/product/${key}`}>{cartItems[key].name}</Link></td>
+                    <td className="table-p-price"><p>{cartItems[key].price}đ</p></td>
+                    <td className="table-p-qty"><input value="1" onChange={()=>{}} name="cart-qty" type="number" /></td>
+                    <td className="table-total"><p>{(cartItems[key].price * cartItems[key].quantity)}đ</p></td>
+                </tr>
+            ))
+        }
+    }
+    const renderTotalPrice = () => {
+        if(cart.length > 0){
+            return cart.reduce((accum, current)=>{
+                return accum = accum + (cartItems[current].price * cartItems[current].quantity)
+            }, 0)
+        }
+        return 0;
+    }
+
     return (
         <div className="cart-area table-area" style={{backgroundColor: '#fff'}}>
             <div className="container">
@@ -18,22 +47,7 @@ const Table = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td className="table-remove"><button><i className="fa fa-trash"></i></button></td>
-                                <td className="table-image"><a href="product-details.html"><img src="assets/img/product/3.jpg" alt="" /></a></td>
-                                <td className="table-p-name"><a href="product-details.html">Habitasse dictumst</a></td>
-                                <td className="table-p-price"><p>$65.00</p></td>
-                                <td className="table-p-qty"><input value="1" name="cart-qty" type="number" /></td>
-                                <td className="table-total"><p>$65.00</p></td>
-                            </tr>
-                            <tr>
-                                <td className="table-remove"><button><i className="fa fa-trash"></i></button></td>
-                                <td className="table-image"><a href="product-details.html"><img src="assets/img/product/4.jpg" alt="" /></a></td>
-                                <td className="table-p-name"><a href="product-details.html">Kaoreet lobortis</a></td>
-                                <td className="table-p-price"><p>$95.00</p></td>
-                                <td className="table-p-qty"><input value="1" name="cart-qty" type="number" /></td>
-                                <td className="table-total"><p>$95.00</p></td>
-                            </tr>
+                            {renderTableContent()}
                         </tbody>
                     </table>
                 </div>
@@ -54,18 +68,15 @@ const Table = () => {
                         <div className="table-total-amount">
                             <div className="single-total-content d-flex justify-content-between">
                                 <span>Subtotal</span>
-                                <span className="c-total-price">$160.00</span>
+                                <span className="c-total-price">{renderTotalPrice()}đ</span>
                             </div>
                             <div className="single-total-content d-flex justify-content-between">
                                 <span>Shipping</span>
-                                <span className="c-total-price"><span>Flat Rate:</span> $5.00</span>
-                            </div>
-                            <div className="single-total-content d-flex justify-content-end">
-                                <a href="#">Calculate shipping</a>
+                                <span className="c-total-price"><span>Flat Rate:</span> 5000 đ</span>
                             </div>
                             <div className="single-total-content d-flex justify-content-between">
                                 <span>Total</span>
-                                <span className="c-total-price">$165.00</span>
+                                <span className="c-total-price">{renderTotalPrice() + 5000}đ</span>
                             </div>
                             <Link to="/checkout">Proceed to checkout</Link>
                         </div>

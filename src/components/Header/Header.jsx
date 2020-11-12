@@ -69,24 +69,24 @@ class Header extends React.Component {
     }
 
     renderProductCheckout = () => {
-        let cart = window.localStorage.getItem('cart')
-            ? JSON.parse(window.localStorage.getItem('cart')) : this.props.cart;
+        const { cartItems } = this.props;
+        let cart = Object.keys(cartItems)
 
-        return [].length > 0
-            ? cart.map((cartProduct, idx) => {
+        return cart.length > 0
+            ? cart.map( key => {
                 return (
-                    <div key={idx} className="cart__checkout__info">
+                    <div key={key} className="cart__checkout__info">
                         <div className="cart__product--name">
-                            <h4>{cartProduct.product.name}</h4>
+                            <h4>{cartItems[key].name}</h4>
                         </div>
                         <div className="cart__product--quantity">
                             <span>
-                                <i className="fas fa-times"/>&nbsp;{cartProduct.quantity}
+                                <i className="fas fa-times"/>&nbsp;{1}
                             </span>
                         </div>
                         <div className="cart__product--price">
                             <span>
-                                ${(cartProduct.product.price * cartProduct.quantity).toFixed(2)}
+                                ${cartItems[key].price}
                             </span>
                         </div>
                     </div>
@@ -96,7 +96,8 @@ class Header extends React.Component {
     }
 
     render() {
-        const numbersOnCart = Object.keys(this.state.cart).length
+        const numbersOnCart = Object.keys(this.props.cartItems).length
+        console.log("Number Of item on Cart", numbersOnCart)
         return (
             <React.Fragment>
                 <header className="header">
@@ -162,7 +163,7 @@ class Header extends React.Component {
                                     <i className="far fa-heart icon-style"/>
                                     <div className="notification">
                                         {/* <p>{this.props.wishList.length}</p> */}
-                                        <p>{numbersOnCart}</p>
+                                        <p>{0}</p>
                                     </div>
                                 </div>
                                 <div className="header__user__action--cart nav-action-style">
@@ -184,38 +185,12 @@ class Header extends React.Component {
                                         </div>
                                     </div>
                                     <div className="notification">
-                                        <p>{this.getTotalQuantityAndPrice(0)}</p>
+                                        <p>{numbersOnCart}</p>
                                     </div>
                                     <span>${this.getTotalQuantityAndPrice(1)}</span>
                                 </div>
                             </div>
-                            <div className="header__user__action--phone">
-                                <i className="fas fa-caret-down"/>
-                                <div className="action__phone__dropdown">
-                                    <div className="header__user__action--login nav-action-style">
-                                        <i className="far fa-user icon-style"/>
-                                        <span id="show-modal" onClick={(e) => this.showModalLogin(e)}>
-                                            Login <span className="highlight-text">or</span> Register
-                                        </span>
-                                    </div>
-                                    <div className="header__user__action--wishlist nav-action-style">
-                                        <i className="far fa-heart icon-style"/>
-                                        <div className="notification">
-                                            {/* <p>{this.props.wishList.length}</p> */}
-                                            <p>{[].length}</p>
-                                        </div>
-                                    </div>
-                                    <div className="header__user__action--cart nav-action-style">
-                                        <Link to="/checkout">
-                                            <i className="fas fa-cart-plus icon-style"/>
-                                        </Link>
-                                        <div className="notification">
-                                            <p>{this.getTotalQuantityAndPrice(0)}</p>
-                                        </div>
-                                        <span>${this.getTotalQuantityAndPrice(1)}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div className="header__navigation">

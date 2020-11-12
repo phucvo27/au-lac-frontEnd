@@ -5,7 +5,7 @@ import HomeContainer from './pages/Home/Home.container';
 import Products from './pages/Products/Products.jsx'
 import ProductDetail from './pages/Product-Detail/Product-Detail-2'
 import Order from './pages/Order/Order';
-import Checkout from './pages/Checkout/Checkout'
+import Checkout from './pages/Checkout/Checkout.container.jsx'
 const App = ()=>{
     return (
         <BrowserRouter>

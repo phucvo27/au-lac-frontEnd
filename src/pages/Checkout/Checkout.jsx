@@ -3,6 +3,34 @@ import React from 'react';
 
 class Checkout extends React.Component {
 
+    renderOrderBody = () => {
+        const { cartItems } = this.props;
+        const cart = cartItems ? Object.keys(cartItems) : [];
+        if(cart.length > 0){
+            return cart.map(key => {
+                return (
+                    <tr key={key} className="cart_item">
+                        <td className="product-name">
+                            {cartItems[key].name} <strong className="product-quantity"> × {cartItems[key].quantity}</strong>
+                        </td>
+                        <td className="product-total">
+                            <span className="amount">{(cartItems[key].price * cartItems[key].quantity)}đ</span>
+                        </td>
+                    </tr>
+                )
+            })
+        }
+    }
+    renderTotalPrice = () =>{
+        const { cartItems } = this.props;
+        const cart = cartItems ? Object.keys(cartItems) : [];
+        if(cart.length > 0){
+            return cart.reduce((accum, current)=>{
+                return accum = accum + (cartItems[current].price * cartItems[current].quantity)
+            }, 0)
+        }
+        return 0;
+    }
     render(){
         return (
             <div className="container">
@@ -100,27 +128,13 @@ class Checkout extends React.Component {
                                             </tr>							
                                         </thead>
                                         <tbody>
-                                            <tr className="cart_item">
-                                                <td className="product-name">
-                                                    Vestibulum suscipit <strong className="product-quantity"> × 1</strong>
-                                                </td>
-                                                <td className="product-total">
-                                                    <span className="amount">$165.00</span>
-                                                </td>
-                                            </tr>
-                                            <tr className="cart_item">
-                                                <td className="product-name">
-                                                    Vestibulum dictum magna	<strong className="product-quantity"> × 1</strong>
-                                                </td>
-                                                <td className="product-total">
-                                                    <span className="amount">$50.00</span>
-                                                </td>
-                                            </tr>
+                                            {this.renderOrderBody()}
+                                            
                                         </tbody>
                                         <tfoot>
                                             <tr className="cart-subtotal">
                                                 <th>Cart Subtotal</th>
-                                                <td><span className="amount">$215.00</span></td>
+                                                <td><span className="amount">{this.renderTotalPrice()}đ</span></td>
                                             </tr>
                                             <tr className="shipping">
                                                 <th>Shipping</th>
@@ -128,7 +142,7 @@ class Checkout extends React.Component {
                                                     <ul>
                                                         <li>
                                                             <label>
-                                                                Flat Rate: <span className="amount">$7.00</span>
+                                                                Flat Rate: <span className="amount">5000</span>
                                                             </label>
                                                         </li>
                                                     </ul>
@@ -137,7 +151,7 @@ class Checkout extends React.Component {
                                             <tr className="order-total">
                                                 <th>Order Total</th>
                                                 <td>
-                                                    <strong><span className="amount">$215.00</span></strong>
+                                                    <strong><span className="amount">{this.renderTotalPrice() + 5000}đ</span></strong>
                                                 </td>
                                             </tr>								
                                         </tfoot>

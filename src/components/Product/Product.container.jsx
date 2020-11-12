@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, useQuery, gql } from '@apollo/client';
 import Product from './Product.jsx'
 
 const ADD_ITEM_TO_CART = gql`
@@ -15,26 +15,31 @@ const GET_CART_ITEMS = gql`
 `;
 const ProductContainer = (props) => {
     const [addItem, { client }] = useMutation(ADD_ITEM_TO_CART);
+    const { data, loading, error } = useQuery(GET_CART_ITEMS);
+    if(loading) return <p>loading...</p>
+    if(error) return <p>we have an error</p>
 
+    const { cartItems } = data;
+    const isInCart = cartItems[props.product.id] ? true : false;
+    console.log(isInCart)
     const handleAdd = (item) => {
         console.log('clicked')
         addItem({variables: {item}}).then(()=>{
-            console.log(item)
-            console.log('add success')
-            const currentCart = client.readQuery({
+            
+            const {cartItems} = client.readQuery({
                 query: GET_CART_ITEMS
             })
-            console.log(currentCart)
+            localStorage.setItem('cartItems', JSON.stringify({...cartItems, [item.id]:{...item, quantity: 1}}))
             client.writeQuery({
                 query: GET_CART_ITEMS,
                 data: {
-                    cartItems: {[item.id]:item}
+                    cartItems: {...cartItems, [item.id]:{...item, quantity: 1}}
                 }
             })
         })
     }
 
-    return <Product {...props} addItem={handleAdd} />
+    return <Product {...props} addItem={handleAdd} isInCart={isInCart} />
 }
 
 export default ProductContainer

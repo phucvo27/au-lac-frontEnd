@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
-import Header from './Header.jsx'
+import Table from './Table.jsx';
 
 const GET_CART_ITEMS = gql` 
     query GetCartItems {
@@ -23,9 +23,7 @@ const HeaderContainer = (props) => {
     
     const { cartItems } = data;
     console.log(cartItems)
-    // console.log(client.cache)
-    //const products = data.listProducts.docs ? data.listProducts.docs : [];
-    return <Header {...props} cartItems={cartItems}/>
+    return <Table {...props} cartItems={cartItems}/>
 }
 
 export default HeaderContainer;
