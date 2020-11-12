@@ -1,8 +1,3 @@
-@mixin border-radius($radius) {
-	border-radius: $radius;
-	-webkit-border-radius: $radius;
-	-moz-border-radius: $radius;
-}
 table {
     border-collapse: collapse;
     width: 100%;
@@ -251,6 +246,7 @@ th, td {
                 }
             }
             & > a { 
+                text-decoration: none;
                 border: 2px solid $color-grey;
                 background: $color-white;
                 color: $color-black;
@@ -264,6 +260,7 @@ th, td {
                 @include border-radius(30px);
                 // font-family: $oswald;
                 text-transform: uppercase;
+                transition: all .2s;
                 &:hover {
                     background: $color-primary none repeat scroll 0 0;
                     border-color: $color-primary;

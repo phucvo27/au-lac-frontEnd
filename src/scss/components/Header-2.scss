@@ -20,7 +20,7 @@
     font-size: 1.3rem;
   }
   
-  input {
+  .input__radius {
     width: 100%;
     height: 4.5rem;
     border: .2rem solid var(--color-border);
@@ -30,7 +30,7 @@
     padding-right: 3.5rem;
   }
   
-  input:focus {
+  .input__radius:focus {
     border: .2rem solid $color-primary;
     transition: .3s;
   }
@@ -545,6 +545,9 @@
     color: $color-text;
     font-weight: bold;
   }
+  .nav__navigation .active__nav {
+    color: $color-primary;
+  }
   
   .nav__contact {
     width: 20%;
@@ -631,9 +634,6 @@
     color: #33e31a;
   }
   
-  .login__modal form {
-  
-  }
   
   .login__modal label {
     font-size: 1.4rem;
@@ -781,203 +781,4 @@
     opacity: 0.6;
   }
   /*================END Navigation Left Layer SECTION=================*/
-  
-  /*===================Responsive SECTION===================*/
-  @media screen and (max-width: 1200px) {
-    .header {
-      //width: 95%;
-    }
-    /*offer section*/
-    .header__offer--location {
-      //padding-right: 2rem;
-    }
-  
-    /*user section*/
-    .header__user {
-      //grid-template-columns: repeat(5, minmax(18rem, 1fr));
-    }
-  
-    .header__user__logo {
-  
-    }
-  
-    .header__user__search {
-  
-    }
-  
-    .header__user__search input {
-      width: 42rem;
-    }
-  
-    .header__user__action {
-  
-    }
-  
-    /*navigation section*/
-    .nav__contact {
-      padding-left: 1rem;
-      padding-right: 2rem;
-    }
-  }
-  
-  @media screen and (max-width: 992px) {
-    /*offer section*/
-    .header__offer--location {
-      padding-right: 4rem;
-    }
-  
-    /*user section*/
-    .header__user__search {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .header__user__search input {
-      width: 36rem;
-    }
-  
-    .header__user__search button {
-      right: 4%;
-    }
-  
-    /*navigation section*/
-    .header__navigation {
-      justify-content: space-between;
-    }
-  
-    .nav__category {
-      width: 20%;
-      justify-content: flex-start;
-    }
-  
-    .nav__navigation {
-      display: none;
-    }
-  
-    .nav__contact {
-      display: none;
-    }
-  
-    .nav__slide__menu {
-      width: 20%;
-      cursor: pointer;
-      padding-right: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      grid-column: 3 / 4;
-      font-size: 1.6rem;
-      color: var(--color-text);
-    }
-  
-    .sub__category {
-      //width: 280%;
-    }
-  }
-  
-  @media screen and (max-width: 768px) {
-    /*offer section*/
-    .header__offer--location {
-      padding-right: 6rem;
-    }
-  
-    /*user section*/
-    .header__user {
-      //grid-template-columns: repeat(4, minmax(18rem, 1fr));
-    }
-  
-    .header__user__logo {
-      width: 20%;
-      margin-right: 2rem;
-    }
-  
-    .header__user__search {
-      width: 60%;
-    }
-  
-    .header__user__search input {
-      width: 100%;
-    }
-  
-    .header__user__action {
-      width: 20%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .header__user__action--desktop {
-      display: none;
-    }
-  
-    .header__user__action--phone {
-      position: relative;
-      opacity: 1;
-      visibility: visible;
-      width: 68%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .header__user__action--phone > i {
-      cursor: pointer;
-      font-size: 4rem;
-      transition: .3s;
-    }
-  
-    .header__user__action--phone i:hover {
-      color: $color-primary;
-      transition: .3s;
-    }
-  
-    .action__phone__dropdown {
-      background-color: #fff;
-      position: absolute;
-      top: 100%;
-      //left: 0%;
-      right: 0;
-    }
-  
-    .show-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transition: .3s;
-    }
-  
-    .action__phone__dropdown > div {
-      margin-bottom: 1rem;
-    }
-  
-    .action__phone__dropdown span {
-      cursor: pointer;
-      font-size: 1.2rem;
-      width: 10rem;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-      transition: .3s;
-    }
-  
-    .action__phone__dropdown span:hover {
-      color: $color-primary;
-      transition: .3s;
-    }
-  
-    /*navigation section*/
-    .nav__slide__menu {
-      //padding-right: 6rem;
-    }
-  
-    .sub__category {
-      width: 360%;
-    }
-  
-    /*Navigation Section*/
-    .nav__category--list {
-      display: none;
-    }
-  }
-  /*===================END Responsive SECTION===================*/
   

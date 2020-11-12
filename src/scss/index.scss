@@ -1,15 +1,16 @@
 @import './variables/variables.scss';
 @import './util/util.scss';
+@import './util/mixin.scss';
 @import './pages/products.scss';
 @import './pages/productDetail.scss';
-@import './pages/checkout.scss';
 @import './components/Header-2.scss';
 @import './components/HomeSlider.scss';
 @import './components/Product.scss';
 @import './components/Table.scss';
-@import './components/InputGroup.scss';
+// @import './components/InputGroup.scss';
 @import './components//ProductDetail/ProductDetail.scss';
 @import './components/ProductCategory.scss';
+@import './pages/checkout.scss';
 * {
     padding: 0;
     margin: 0;

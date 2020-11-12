@@ -1,6 +1,6 @@
 import React from 'react';
 //import {ReactComponent as Logo} from '../../assets/footer/logo.svg'
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 
 class Header extends React.Component {
@@ -115,7 +115,7 @@ class Header extends React.Component {
                         </div>
                         <div className="header__user__search">
                             <form action="#">
-                                <input type="text" placeholder="Search among 100.000 products..."/>
+                                <input className="input__radius" type="text" placeholder="Search among 100.000 products..."/>
                                 <button className="btn-search">
                                     <i className="fas fa-search"/>
                                 </button>
@@ -138,12 +138,12 @@ class Header extends React.Component {
                                                 <label className="form-label-style" htmlFor="username">Username or
                                                     email <span
                                                         className="required">*</span></label>
-                                                <input type="text" name="username" placeholder="Username"/>
+                                                <input className="input__radius" type="text" name="username" placeholder="Username"/>
                                             </div>
                                             <div className="login__form--password">
                                                 <label className="form-label-style" htmlFor="password">Password <span
                                                     className="required">*</span></label>
-                                                <input type="password" name="password" placeholder="Password"/>
+                                                <input className="input__radius" type="password" name="password" placeholder="Password"/>
                                             </div>
                                             <div className="login__form--action">
                                                 <button type="submit">LOGIN</button>
@@ -162,7 +162,7 @@ class Header extends React.Component {
                                     </div>
                                 </div>
                                 <div className="header__user__action--cart nav-action-style">
-                                    <Link to="#">
+                                    <Link to="/orders">
                                         <i className="fas fa-cart-plus icon-style"/>
                                     </Link>
                                     <div className="cart__checkout__container">
@@ -251,25 +251,25 @@ class Header extends React.Component {
                         <div className="nav__navigation">
                             <ul>
                                 <li>
-                                    <Link to="/">Trang Chủ</Link>
+                                    <NavLink exact to="/" activeClassName="active__nav">Trang Chủ</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/products">Sản Phẩm</Link>
+                                    <NavLink to="/products" activeClassName="active__nav">Sản Phẩm</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="#">Tin Tức</Link>
+                                    <NavLink to="/news" activeClassName="active__nav">Tin Tức</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/blogs">Thư Viện</Link>
+                                    <NavLink to="/blogs" activeClassName="active__nav">Thư Viện</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="#">Công Thức</Link>
+                                    <NavLink to="/recipes" activeClassName="active__nav">Công Thức</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/about-us">Hệ Thống Phản Hồi</Link>
+                                    <NavLink to="/about-us" activeClassName="active__nav">Hệ Thống Phản Hồi</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="contact">Về Chúng Tôi</Link>
+                                    <NavLink to="contact" activeClassName="active__nav">Về Chúng Tôi</NavLink>
                                 </li>
                             </ul>
                         </div>

@@ -1,4 +1,236 @@
-.form__checkout {
+.content {
     width: 100%;
+    background-color: $color-white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .left__content{
+        width: 50%;
+        padding: 0 2rem
+    }
+    .row {
+        width: 100%;
+    }
     
+    .half__row {
+        display: flex;
+        justify-content: space-between;
+
+        .checkout-form-list {
+            width: 45%;
+        }
+    }
+    .right__content{
+        width: 50%;
+        .your-order {
+            background: $color9 none repeat scroll 0 0;
+            padding: 3rem 4rem 4.5rem;
+            h3 { 
+                border-bottom: 1px solid $bg-color-3;
+                color: $dark-hover;
+                font-size: 24px;
+                line-height: 30px;
+                margin: 0 0 20px;
+                padding-bottom: 11px;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+            .your-order-table { 
+                table { 
+                    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+                    border: medium none;
+                    width: 100%;
+                    & th, & td {
+                        border-bottom: 1px solid $bg-color-3;
+                        border-right: medium none;
+                        color: $color2;
+                        font-size: 1.4rem;
+                        font-weight: 500;
+                        padding: 1.5rem 0;
+                        text-align: center;
+                    }
+                    th {
+                        border-top: medium none;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        vertical-align: middle;
+                        white-space: nowrap;
+                        width: 29.1rem;
+                    }
+                    tbody { 
+                        .cart_item { 
+                            .product-name {
+                                width: 410px;
+                            }
+                        }
+                    }
+                    tfoot { 
+                        .cart-subtotal { 
+                            & > td { 
+                                font-weight: 700;
+                            }
+                        }
+                        .shipping { 
+                            td { 
+                                ul { 
+                                    li { 
+                                        input {position: relative; top: .2rem;}
+                                        &:first-child label {font-weight: 700;}
+                                    }
+                                }
+                            }
+                            & input {height: 1.2rem; width: auto;}
+                        }
+                        .order-total {
+                            th { 
+                                font-size: 2rem;
+                                border: 0;
+                            }
+                            td { 
+                                font-size: 2rem;
+                                color: $red;
+                                border: 0;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            .payment-method {
+                padding-top: 22px;
+                h4 {display: flex; margin-bottom: 2px;}
+                & > h4 {color: $text-color; font-size: 12px; font-weight: 400;}
+                a {
+                    color: $text-color;cursor: pointer; 
+                    font-size: 14px; 
+                    font-weight: 500;
+                    &:hover {color: $color-primary}
+                    img {
+                        margin-left: 9px; 
+                        max-height: 52px;
+                    }
+                }
+                
+                .order-button-payment { 
+                    input { 
+                        cursor: pointer;
+                        width: 100%;
+                        font-size: 17px;
+                        letter-spacing: .5px;
+                        margin-top: 20px;
+                        background: $color-primary;
+                        color: $color-white;
+                        padding: 1rem 0;
+                        border-radius: 3rem;
+                        outline: none;
+                        border: none;
+                        transition: all .2s;
+                        &:hover {
+                            background: transparent;
+                            color: $color-primary;
+                            border-color: $color-primary;
+                            border: .1rem solid $color-primary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .checkbox-form { 
+        padding-top: 4px;
+        h3 { 
+            border-bottom: 1px solid $color-border;
+            color: $dark-hover;
+            display: flex;
+            font-size: 2rem;
+            margin: 0 0 2rem;
+            padding-bottom: 1.2rem;
+            padding-left: .3rem;
+            width: 100%;
+            font-weight: 600;
+        }
+        .country-select { 
+            margin-bottom: 2.2rem; position: relative;
+            select {
+                background: $color-grey none repeat scroll 0 0;
+                border: 0 none;
+                font-size: 1.2rem;
+                height: 4.2rem;
+                outline: medium none;
+                padding-left: 1rem;
+                width: 100%;
+                cursor: pointer;
+                color: $color-text2;
+            }
+            label { 
+                color: $label-color;
+            }
+        }
+        .checkout-form-list {
+            margin-bottom: 2rem;
+            label { 
+                color: $label-color;
+                display: block;
+                font-size: 1.2rem;
+                margin: 0 0 .5rem;
+            }
+            
+            & input[type="text"], & input[type="password"], & input[type="email"] {
+                // background: $color-grey none repeat scroll 0 0;
+                // border: 0 none;
+                // @include border-radius(0px);
+                // color: $color-text2;
+                // font-size: 12px;
+                // font-weight: 300;
+                // height: 42px;
+                // outline: medium none;
+                // padding: 0 0 0 10px;
+                // width: 100%;
+                background: #fbfbfb none repeat scroll 0 0;
+                border: 0;
+                color: #696969;
+                height: 46px;
+                margin-bottom: 20px;
+                padding: 0 15px;
+                width: 100%;
+            }
+            .create-acc {
+                label {cursor: inherit}
+                #cbox_info > {
+                    p {font-size: 1.2rem; font-weight: 300;}
+                    & > label {color: $color-primary;}
+                }
+            }
+        }
+        .different-address { 
+            .ship-different-title { 
+                h3 { 
+                    label { 
+                        color: $dark-hover;
+                        font-size: 2.1rem;
+                        font-weight: 700;
+                        margin-right: 2rem;
+                        cursor: pointer;
+                    }
+                }
+                & input {width: auto; height: 3rem; margin-right: 1rem;}
+            }
+            #ship-box-info { 
+                display: none;
+            }
+            .order-notes { 
+                .checkout-form-list {
+                    margin-bottom: 0;
+                    #checkout-mess { 
+                        background: $color-grey none repeat scroll 0 0;
+                        border: 0 none;
+                        height: 9rem;
+                        padding: 1.5rem;
+                        width: 100%;
+                        color: #777777;
+                    }
+                }
+            }
+        }
+    }
 }

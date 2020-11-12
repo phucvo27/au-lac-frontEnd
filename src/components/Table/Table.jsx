@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 const Table = () => {
     return (
@@ -67,7 +67,7 @@ const Table = () => {
                                 <span>Total</span>
                                 <span className="c-total-price">$165.00</span>
                             </div>
-                            <a href="checkout.html">Proceed to checkout</a>
+                            <Link to="/checkout">Proceed to checkout</Link>
                         </div>
                     </div>
                 </div>
