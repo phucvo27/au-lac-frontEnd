@@ -20,17 +20,15 @@ class Header extends React.Component {
 
     // Mode 0: get quantity
     // Mode 1: get price
-    getTotalQuantityAndPrice = (mode) => {
-        //const cart = this.props.cart;
-        // const cart = window.localStorage.getItem('cart')
-        //     ? JSON.parse(window.localStorage.getItem('cart'))
-        //     : this.props.cart;
-
-        return mode === 0
-            ? [].reduce((total, product) => total + product.quantity, 0)
-            : [].reduce((total, c) => {
-                return total + c.product.price * c.quantity;
-            }, 0).toFixed(2);
+    getTotalQuantityAndPrice = () => {
+        const { cartItems } = this.props;
+        const cart = Object.keys(cartItems);
+        if(cart.length > 0){
+            return cart.reduce((accum, current)=>{
+                return accum = accum + (cartItems[current].price * cartItems[current].quantity)
+            }, 0)
+        }
+        return 0;
     }
 
     showActionDropDownPhone = (e) => {

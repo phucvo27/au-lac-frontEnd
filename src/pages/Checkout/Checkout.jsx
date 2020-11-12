@@ -43,14 +43,10 @@ class Checkout extends React.Component {
                                     <div className="country-select">
                                         <label>Country <span className="required">*</span></label>
                                         <select>
-                                            <option value="volvo">Bangladesh</option>
-                                            <option value="saab">Algeria</option>
-                                            <option value="mercedes">Afghanistan</option>
-                                            <option value="audi">Ghana</option>
-                                            <option value="audi2">Albania</option>
-                                            <option value="audi3">Bahrain</option>
-                                            <option value="audi4">Colombia</option>
-                                            <option value="audi5">Dominican Republic</option>
+                                            <option value="volvo">TPHCM</option>
+                                            <option value="saab">Hà Nội</option>
+                                            <option value="mercedes">Đà Nẵng</option>
+                                            <option value="audi">Cần Thơ</option>
                                         </select> 										
                                     </div>
                                 </div>
