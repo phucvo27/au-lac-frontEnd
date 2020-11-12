@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import { cartItemsVar } from '../../graphql/cache';
 const Product = (props) => {
     const addToCart = ()=>{
-        console.log("Clicked add button")
-        const currentCarts = cartItemsVar();
-        localStorage.setItem('carts', JSON.stringify([...currentCarts, props.product]));
-        cartItemsVar([...cartItemsVar(), props.product])
+        props.addItem(props.product)
     }
     const { id, image, name, price} = props.product;
     return (

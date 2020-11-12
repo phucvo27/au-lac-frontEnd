@@ -9,8 +9,12 @@ import {
 } from './cart.utils';
 
 export const typeDefs = gql`
-  extend type Item {
-    quantity: Int
+  extend type Product {
+    name: String!
+    price: String!
+    image: String!
+    quantity: Int!
+    id: String!
   }
   extend type DateTime {
     nanoseconds: Int!
@@ -24,7 +28,7 @@ export const typeDefs = gql`
   }
   extend type Mutation {
     ToggleCartHidden: Boolean!
-    AddItemToCart(item: Item!): [Item]!
+    AddItemToCart(item: Product!): Boolean!
     SetCurrentUser(user: User!): User!
     RemoveItemFromCart(item: Item!): [Item]!
     ClearItemFromCart(item: Item!): [Item]!
@@ -93,16 +97,17 @@ export const resolvers = {
       return !cartHidden;
     },
 
-    addItemToCart: (_root, { item }, { cache }) => {
-      const { cartItems } = cache.readQuery({
-        query: GET_CART_ITEMS
-      });
+    AddItemToCart: (_root, { item }, { cache }) => {
+      console.log(item)
+      // const { cartItems } = cache.readQuery({
+      //   query: GET_CART_ITEMS
+      // });
 
-      const newCartItems = addItemToCart(cartItems, item);
+      // const newCartItems = addItemToCart(cartItems, item);
 
-      updateCartItemsRelatedQueries(cache, newCartItems);
+      // updateCartItemsRelatedQueries(cache, newCartItems);
 
-      return newCartItems;
+      // return newCartItems;
     },
 
     removeItemFromCart: (_root, { item }, { cache }) => {

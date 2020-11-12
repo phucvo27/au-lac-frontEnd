@@ -1,5 +1,5 @@
 import React from 'react';
-import Product from '../../components/Product/Product.jsx';
+import Product from '../../components/Product/Product.container.jsx';
 import HomeSlider from '../../components/HomeSlider/HomeSlider.jsx';
 import fakeData from '../../data/fake-data';
 

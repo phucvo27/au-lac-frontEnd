@@ -18,8 +18,13 @@ const cache = new InMemoryCache({
       fields: {
         cartItems: {
           read() {
+            if(localStorage){
+              const initData = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : {}
+              console.log(initData)
+              return cartItemsVar(initData);
+            }
+            return cartItemsVar({})
             
-            return cartItemsVar();
           }
         }
       }
