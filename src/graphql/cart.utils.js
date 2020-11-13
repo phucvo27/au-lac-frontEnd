@@ -1,5 +1,11 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
-  return {...cartItems, [cartItemToAdd.id]: { ...cartItemToAdd, quantity: 1 }};
+  return {
+      ...cartItems, 
+      [cartItemToAdd.id]: { 
+        ...cartItemToAdd, 
+        quantity: cartItemToAdd.quantity > 1 ? cartItemToAdd.quantity : 1 
+      }
+    };
 };
 export const updateItemOnCart = (cartItems, cartItemToAdd) => {
   return {
@@ -13,7 +19,7 @@ export const updateItemOnCart = (cartItems, cartItemToAdd) => {
 export const removeItemFromCart = (cartItems = {}, cartItemToRemove) => {
     const cart = Object.keys(cartItems);
     let result = {};
-    cart.map(key => {
+    cart.forEach(key => {
       if(key !== cartItemToRemove.id){
         result[key] = cartItems[key]
       }

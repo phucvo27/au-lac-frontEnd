@@ -1,8 +1,9 @@
 import { gql } from '@apollo/client';
 
 import {
-  // addItemToCart,
+  addItemToCart,
   removeItemFromCart,
+  updateItemOnCart,
   clearItemFromCart,
   getCartTotal,
   getCartItemCount
@@ -29,6 +30,7 @@ export const typeDefs = gql`
   extend type Mutation {
     ToggleCartHidden: Boolean!
     AddItemToCart(item: Product!): Boolean!
+    UpdateItemOnCart(item: Product!): Boolean!
     SetCurrentUser(user: User!): User!
     RemoveItemFromCart(item: Product!): [Item]!
     ClearItemFromCart(item: Item!): [Item]!
@@ -99,10 +101,19 @@ export const resolvers = {
 
     AddItemToCart: (_root, { item }, { cache }) => {
       console.log(item)
-      // const { cartItems } = cache.readQuery({
-      //   query: GET_CART_ITEMS
-      // });
-
+      const { cartItems } = cache.readQuery({
+        query: GET_CART_ITEMS
+      });
+      console.log(cartItems)
+      const newCart = addItemToCart(cartItems, item);
+      console.log(newCart)
+      cache.writeQuery({
+        query: GET_CART_ITEMS,
+        data: {
+          cartItems: newCart
+        }
+      })
+      localStorage.setItem('cartItems', JSON.stringify(newCart))
       // const newCartItems = addItemToCart(cartItems, item);
 
       // updateCartItemsRelatedQueries(cache, newCartItems);
@@ -133,7 +144,22 @@ export const resolvers = {
 
       return item;
     },
-
+    UpdateItemOnCart: (_root, { item }, {cache})=>{
+      console.log("im in update item");
+      console.log(item);
+      const { cartItems } = cache.readQuery({
+        query: GET_CART_ITEMS
+      });
+      const newCart = updateItemOnCart(cartItems, item);
+      console.log(newCart);
+      localStorage.setItem('cartItems', JSON.stringify(newCart))
+      cache.writeQuery({
+        query: GET_CART_ITEMS,
+        data: {
+          cartItems: newCart
+        }
+      })
+    },
     clearItemFromCart: (_root, { item }, { cache }) => {
       const { cartItems } = cache.readQuery({
         query: GET_CART_ITEMS

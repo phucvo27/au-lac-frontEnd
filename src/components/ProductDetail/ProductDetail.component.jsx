@@ -59,44 +59,45 @@ class ProductDetail extends React.Component {
     }
     descreaseQuantity = ()=>{
         const { updateQuantity } = this.state;
-        if(updateQuantity.isUpdate){
-            this.setState((prevState)=>{
-                return {
-                    updateQuantity: {
-                        isUpdate: true,
-                        newQuantity: prevState.updateQuantity.newQuantity - 1
+        if(updateQuantity.newQuantity > 0 || !updateQuantity.isUpdate){
+            if(updateQuantity.isUpdate){
+                this.setState((prevState)=>{
+                    return {
+                        updateQuantity: {
+                            isUpdate: true,
+                            newQuantity: prevState.updateQuantity.newQuantity - 1
+                        }
                     }
-                }
-            })
-        }else {
-            this.setState(()=>{
-                return {
-                    updateQuantity: {
-                        isUpdate: true,
-                        newQuantity: this.props.product.quantity - 1
+                })
+            }else {
+                this.setState(()=>{
+                    return {
+                        updateQuantity: {
+                            isUpdate: true,
+                            newQuantity: this.props.product.quantity - 1
+                        }
                     }
-                }
-            })
-        } 
+                })
+            }
+        }
+         
     }
     addProductCart = (product) => {
-        let {cart} = this.props;
-        let productNotExist = true;
-        cart = cart.map(productCart => {
-            if(productCart.product.id === product.id) {
-                productNotExist = false;
-                productCart.quantity += 1;
+        console.log('add product')
+        const { isUpdate, newQuantity } = this.state.updateQuantity
+        if(this.props.isInCart){
+            const newProduct = {
+                ...product,
+                quantity: newQuantity
             }
-            return productCart;
-        });
-
-        if(productNotExist) {
-            cart.push({
-                product: product,
-                quantity: 1
-            });
+            this.props.update(newProduct)
+        }else {
+            let newProduct = {...product}
+            if(isUpdate){
+                newProduct.quantity = newQuantity
+            }
+            this.props.add(newProduct)
         }
-
         //this.props.dispatch(addCart(cart));
     }
 
@@ -195,8 +196,9 @@ class ProductDetail extends React.Component {
     }
 
     render() {
-        const {product} = this.state;
+        const { updateQuantity} = this.state;
         // this.props.cart = []
+        const { product } = this.props
         return (
             <div className="product-detail__container">
                 <div className="product-detail__image">
@@ -230,9 +232,9 @@ class ProductDetail extends React.Component {
                         </div>
                         <div className="content--quantity--action">
                             <div className="content--quantity__add-cart">
-                                <button onClick={() => this.addProductCart(product)}>
+                                <button disabled={!updateQuantity.isUpdate && this.props.isInCart} onClick={() => this.addProductCart(product)}>
                                     <i className="fas fa-shopping-bag"/>
-                                    ADD TO CART
+                                    {this.props.isInCart ? 'UPDATE CART' : 'ADD TO CART'}
                                 </button>
                             </div>
                             <div className="content--quantity__action-btn">

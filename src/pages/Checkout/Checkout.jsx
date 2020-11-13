@@ -1,5 +1,5 @@
 import React from 'react';
-//import InputGroup from '../../components/InputGroup/InputGroup.jsx';
+import { withRouter } from 'react-router-dom'
 
 class Checkout extends React.Component {
 
@@ -31,10 +31,14 @@ class Checkout extends React.Component {
         }
         return 0;
     }
+    handleSubmit = (e)=>{
+        e.preventDefault();
+        this.props.history.push('/')
+    }
     render(){
         return (
             <div className="container">
-                <form action="#">
+                <form onSubmit={this.handleSubmit}>
                     <div className="content pt-5 pb-10">
                         <div className="left__content">
                             <div className="checkbox-form">						
@@ -169,4 +173,4 @@ class Checkout extends React.Component {
 }
 
 
-export default Checkout;
+export default withRouter(Checkout);

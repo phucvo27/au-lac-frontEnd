@@ -1,28 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import TableRow from './TableRow.jsx'
 const Table = (props) => {
     const { cartItems } = props;
     const cart = Object.keys(cartItems);
     const renderTableContent = () =>{
         if(cart.length > 0 ){
-            return cart.map(key => (
-                <tr key={key}>
-                    <td className="table-remove">
-                        <button onClick={()=> {props.remove(cartItems[key])}}>
-                            <i className="fa fa-trash"></i>
-                        </button>
-                    </td>
-                    <td className="table-image">
-                        <Link to={`/product/${key}`}>
-                            <img src={cartItems[key].image} alt={cartItems[key].name} />
-                        </Link>
-                    </td>
-                    <td className="table-p-name"><Link to={`/product/${key}`}>{cartItems[key].name}</Link></td>
-                    <td className="table-p-price"><p>{cartItems[key].price}đ</p></td>
-                    <td className="table-p-qty"><input value="1" onChange={()=>{}} name="cart-qty" type="number" /></td>
-                    <td className="table-total"><p>{(cartItems[key].price * cartItems[key].quantity)}đ</p></td>
-                </tr>
+            return cart.map(key => ( 
+                <TableRow key={key} product={cartItems[key]} update={props.update} remove={props.remove} />
+                // <tr key={key}>
+                //     <td className="table-remove">
+                //         <button onClick={()=> {props.remove(cartItems[key])}}>
+                //             <i className="fa fa-trash"></i>
+                //         </button>
+                //     </td>
+                //     <td className="table-image">
+                //         <Link to={`/product/${key}`}>
+                //             <img src={cartItems[key].image} alt={cartItems[key].name} />
+                //         </Link>
+                //     </td>
+                //     <td className="table-p-name"><Link to={`/product/${key}`}>{cartItems[key].name}</Link></td>
+                //     <td className="table-p-price"><p>{cartItems[key].price}đ</p></td>
+                //     <td className="table-p-qty"><input value="1" onChange={()=>{}} name="cart-qty" type="number" /></td>
+                //     <td className="table-total"><p>{(cartItems[key].price * cartItems[key].quantity)}đ</p></td>
+                // </tr>
             ))
         }
     }
