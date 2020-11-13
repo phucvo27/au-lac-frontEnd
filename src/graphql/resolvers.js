@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 import {
-  addItemToCart,
+  // addItemToCart,
   removeItemFromCart,
   clearItemFromCart,
   getCartTotal,
@@ -30,7 +30,7 @@ export const typeDefs = gql`
     ToggleCartHidden: Boolean!
     AddItemToCart(item: Product!): Boolean!
     SetCurrentUser(user: User!): User!
-    RemoveItemFromCart(item: Item!): [Item]!
+    RemoveItemFromCart(item: Product!): [Item]!
     ClearItemFromCart(item: Item!): [Item]!
   }
 `;
@@ -110,16 +110,28 @@ export const resolvers = {
       // return newCartItems;
     },
 
-    removeItemFromCart: (_root, { item }, { cache }) => {
+    RemoveItemFromCart: (_root, { item }, { cache }) => {
       const { cartItems } = cache.readQuery({
         query: GET_CART_ITEMS
       });
+      console.log(cartItems)
+      console.log('running remove item from cart')
+      console.log(item)
+      const newCart = removeItemFromCart(cartItems, item);
+      console.log(newCart)
+      cache.writeQuery({
+        query: GET_CART_ITEMS,
+        data: {
+          cartItems: newCart
+        }
+      })
+      localStorage.setItem('cartItems', JSON.stringify(newCart))
 
-      const newCartItems = removeItemFromCart(cartItems, item);
+      //const newCartItems = removeItemFromCart(cartItems, item);
 
-      updateCartItemsRelatedQueries(cache, newCartItems);
+      //updateCartItemsRelatedQueries(cache, newCartItems);
 
-      return newCartItems;
+      return item;
     },
 
     clearItemFromCart: (_root, { item }, { cache }) => {

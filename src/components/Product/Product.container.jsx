@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import Product from './Product.jsx'
-
+import { addItemToCart } from '../../graphql/cart.utils'
 const ADD_ITEM_TO_CART = gql`
     mutation AddItemToCart($item: Product!){
         addItemToCart(item: $item) @client
@@ -29,11 +29,13 @@ const ProductContainer = (props) => {
             const {cartItems} = client.readQuery({
                 query: GET_CART_ITEMS
             })
-            localStorage.setItem('cartItems', JSON.stringify({...cartItems, [item.id]:{...item, quantity: 1}}))
+            const newCart = addItemToCart(cartItems, item)
+            console.log(newCart)
+            localStorage.setItem('cartItems', JSON.stringify(newCart))
             client.writeQuery({
                 query: GET_CART_ITEMS,
                 data: {
-                    cartItems: {...cartItems, [item.id]:{...item, quantity: 1}}
+                    cartItems: newCart
                 }
             })
         })

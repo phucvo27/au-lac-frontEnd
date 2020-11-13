@@ -1,47 +1,48 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
-  const existingCartItem = cartItems.find(
-    cartItem => cartItem.id === cartItemToAdd.id
-  );
-
-  if (existingCartItem) {
-    return cartItems.map(cartItem =>
-      cartItem.id === cartItemToAdd.id
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-        : cartItem
-    );
-  }
-
-  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+  return {...cartItems, [cartItemToAdd.id]: { ...cartItemToAdd, quantity: 1 }};
+};
+export const updateItemOnCart = (cartItems, cartItemToAdd) => {
+  return {
+    ...cartItems, 
+    [cartItemToAdd.id]: {
+        ...cartItems[cartItemToAdd.id], 
+        quantity: cartItemToAdd.quantity
+      }
+    }
+}
+export const removeItemFromCart = (cartItems = {}, cartItemToRemove) => {
+    const cart = Object.keys(cartItems);
+    let result = {};
+    cart.map(key => {
+      if(key !== cartItemToRemove.id){
+        result[key] = cartItems[key]
+      }
+    })
+    return result
+    
 };
 
-export const removeItemFromCart = (cartItems, cartItemToRemove) => {
-  const existingCartItem = cartItems.find(
-    cartItem => cartItem.id === cartItemToRemove.id
-  );
-
-  if (existingCartItem.quantity === 1) {
-    return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
+export const getCartItemCount = (cartItems = {})=>{
+  const cart = Object.keys(cartItems);
+  if(cart.length >0){
+    return cart.reduce((accum, next)=>{
+      return accum = accum + cartItems[next].quantity
+    }, 0)
+  }else{
+    return 0
   }
+}
 
-  return cartItems.map(cartItem =>
-    cartItem.id === cartItemToRemove.id
-      ? { ...cartItem, quantity: cartItem.quantity - 1 }
-      : cartItem
-  );
-};
-
-export const getCartItemCount = cartItems =>
-  cartItems.reduce(
-    (accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity,
-    0
-  );
-
-export const getCartTotal = cartItems =>
-  cartItems.reduce(
-    (accumalatedQuantity, cartItem) =>
-      accumalatedQuantity + cartItem.quantity * cartItem.price,
-    0
-  );
+export const getCartTotal = (cartItems = {})=>{
+  const cart = Object.keys(cartItems);
+  if(cart.length >0){
+    return cart.reduce((accum, next)=>{
+      return accum = accum + (cartItems[next].quantity * cartItems[next].price)
+    }, 0)
+  }else{
+    return 0
+  }
+}
 
 export const clearItemFromCart = (cartItems, item) =>
   cartItems.filter(cartItem => cartItem.id !== item.id);

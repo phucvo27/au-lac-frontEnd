@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { cartItemsVar } from '../../graphql/cache';
 const Product = (props) => {
     const addToCart = ()=>{
         props.addItem(props.product)

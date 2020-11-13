@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 // Setup GraphQL
 
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-import { cartItemsVar } from './graphql/cache';
+//import { cartItemsVar } from './graphql/cache';
 import { GET_CART_ITEMS } from './graphql/Cart'
 import { typeDefs, resolvers } from './graphql/resolvers'
 const link = createHttpLink({

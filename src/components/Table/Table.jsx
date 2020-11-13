@@ -8,7 +8,11 @@ const Table = (props) => {
         if(cart.length > 0 ){
             return cart.map(key => (
                 <tr key={key}>
-                    <td className="table-remove"><button><i className="fa fa-trash"></i></button></td>
+                    <td className="table-remove">
+                        <button onClick={()=> {props.remove(cartItems[key])}}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </td>
                     <td className="table-image">
                         <Link to={`/product/${key}`}>
                             <img src={cartItems[key].image} alt={cartItems[key].name} />

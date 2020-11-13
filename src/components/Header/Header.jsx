@@ -77,7 +77,7 @@ class Header extends React.Component {
                         <div className="cart__product--name">
                             <h4>{cartItems[key].name}</h4>
                         </div>
-                        <div className="cart__product--quantity">
+                        <div onClick={()=>{this.props.remove(cartItems[key])}} className="cart__product--quantity">
                             <span>
                                 <i className="fas fa-times"/>&nbsp;{1}
                             </span>
