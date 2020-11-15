@@ -131,6 +131,14 @@
                             border-color: $color-primary;
                             border: .1rem solid $color-primary;
                         }
+                        &:disabled {
+                            background-color: grey;
+                            color: #fff;
+                            border: none;
+                            &:hover {
+                                border: none;
+                            }
+                        }
                     }
                 }
             }

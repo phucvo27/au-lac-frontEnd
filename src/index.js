@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 //import { cartItemsVar } from './graphql/cache';
 import { GET_CART_ITEMS } from './graphql/Cart'
-import { typeDefs, resolvers } from './graphql/resolvers'
+import { typeDefs, resolvers, GET_CURRENT_USER } from './graphql/resolvers'
 const link = createHttpLink({
     uri: "http://54.254.210.233:1345/graphql"
 })
@@ -20,12 +20,20 @@ const client = new ApolloClient({
     resolvers
 })
 let oldCart = localStorage.getItem('cartItems');
+let currentUser = localStorage.getItem('currentUser');
 oldCart = oldCart ? JSON.parse(oldCart) : {}
+currentUser = currentUser ? JSON.parse(currentUser) : {}
 client.writeQuery({
     query: GET_CART_ITEMS,
     data: {
         cartItems: oldCart
     }
+})
+client.writeQuery({
+  query: GET_CURRENT_USER,
+  data: {
+    currentUser: currentUser
+  }
 })
 
 ReactDOM.render(
@@ -36,25 +44,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-/*
-typePolicies: {
-    Query: {
-      fields: {
-        cartItems: {
-          read() {
-            if(localStorage){
-              const initData = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : {}
-              console.log(initData)
-              return cartItemsVar(initData);
-            }
-            return cartItemsVar({})
-            
-          }
-        }
-      }
-    }
-  } */
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();

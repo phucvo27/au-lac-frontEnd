@@ -98,6 +98,13 @@ class ProductDetail extends React.Component {
             }
             this.props.add(newProduct)
         }
+        this.setState(()=>{
+            return {
+                updateQuantity: {
+                    isUpdate: false
+                }
+            }
+        })
         //this.props.dispatch(addCart(cart));
     }
 

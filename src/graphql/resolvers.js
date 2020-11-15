@@ -4,7 +4,6 @@ import {
   addItemToCart,
   removeItemFromCart,
   updateItemOnCart,
-  clearItemFromCart,
   getCartTotal,
   getCartItemCount
 } from './cart.utils';
@@ -22,10 +21,9 @@ export const typeDefs = gql`
     seconds: Int!
   }
   extend type User {
-    id: ID!
-    displayName: String!
+    name: String!
     email: String!
-    createdAt: DateTime!
+    token: String!
   }
   extend type Mutation {
     ToggleCartHidden: Boolean!
@@ -33,7 +31,7 @@ export const typeDefs = gql`
     UpdateItemOnCart(item: Product!): Boolean!
     SetCurrentUser(user: User!): User!
     RemoveItemFromCart(item: Product!): [Item]!
-    ClearItemFromCart(item: Item!): [Item]!
+    ClearItemFromCart(item: Item!): Boolean!
   }
 `;
 
@@ -61,7 +59,7 @@ const GET_CART_ITEMS = gql`
   }
 `;
 
-const GET_CURRENT_USER = gql`
+export const GET_CURRENT_USER = gql`
   {
     currentUser @client
   }
@@ -160,23 +158,26 @@ export const resolvers = {
         }
       })
     },
-    clearItemFromCart: (_root, { item }, { cache }) => {
-      const { cartItems } = cache.readQuery({
-        query: GET_CART_ITEMS
-      });
-
-      const newCartItems = clearItemFromCart(cartItems, item);
-
-      updateCartItemsRelatedQueries(cache, newCartItems);
-
-      return newCartItems;
+    ClearItemFromCart: (_root, args, { cache }) => {
+      console.log('clear item on revolver')
+      cache.writeQuery({
+        query:GET_CART_ITEMS,
+        data: {
+          cartItems: {}
+        }
+      })
+      
+      return {};
     },
 
-    setCurrentUser: (_root, { user }, { cache }) => {
+    SetCurrentUser: (_root, { user }, { cache }) => {
+      console.log("im in SetCurrentUser resolvers");
+      console.log(user)
       cache.writeQuery({
         query: GET_CURRENT_USER,
         data: { currentUser: user }
       });
+      localStorage.setItem('currentUser', JSON.stringify(user))
 
       return user;
     }

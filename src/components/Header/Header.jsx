@@ -1,6 +1,7 @@
 import React from 'react';
 //import {ReactComponent as Logo} from '../../assets/footer/logo.svg'
 import {Link, NavLink} from "react-router-dom";
+import LoginRegister from '../LoginRegister/LoginRegister.container.jsx';
 
 class Header extends React.Component {
     constructor(props) {
@@ -10,16 +11,6 @@ class Header extends React.Component {
         }
     }
 
-    componentDidMount() {
-        //const cartItems = useReactiveVar(cartItemsVar);
-        console.log(this.props.cartItems)
-        //const { cartItems } = cartItemsVar()
-        //console.log(cartItems)
-        //this.setState(()=> ({cart: cartItems}))
-    }
-
-    // Mode 0: get quantity
-    // Mode 1: get price
     getTotalQuantityAndPrice = () => {
         const { cartItems } = this.props;
         const cart = Object.keys(cartItems);
@@ -29,41 +20,6 @@ class Header extends React.Component {
             }, 0)
         }
         return 0;
-    }
-
-    showActionDropDownPhone = (e) => {
-        const dropdownActionPhone = document.querySelector(".action__phone__dropdown");
-        const dropdownActionPhoneDisplay = document.querySelector(".action__phone__dropdown--display");
-
-        if(e.target.className.includes("fa-caret-down") && !dropdownActionPhoneDisplay) {
-            dropdownActionPhone.classList.add("action__phone__dropdown--display");
-        }
-        else if(dropdownActionPhone) {
-            dropdownActionPhone.classList.remove("action__phone__dropdown--display");
-        }
-    }
-
-    showModalLogin = (e) => {
-        const loginModal = document.querySelector(".header__login-modal__container");
-
-        if(e.target.id === "show-modal" && loginModal) {
-            loginModal.classList.add("header__login-modal__container--display");
-        }
-    }
-
-    showNavigationLeftMobile = (e) => {
-        const navigationLeftEle = document.querySelector(".header__nav__left__container");
-        const iconClassName = e.target.className;
-        const bodyDoc = document.querySelector("body");
-        const screenWidth = document.documentElement.clientWidth;
-
-        if(iconClassName.includes("nav__category__click") && navigationLeftEle
-            && screenWidth <= 768
-        ) {
-            navigationLeftEle.classList.add("header__nav__left__container--display");
-            bodyDoc.classList.remove("translate__body--original");
-            bodyDoc.classList.add("translate__body");
-        }
     }
 
     renderProductCheckout = () => {
@@ -79,7 +35,7 @@ class Header extends React.Component {
                         </div>
                         <div onClick={()=>{this.props.remove(cartItems[key])}} className="cart__product--quantity">
                             <span>
-                                <i className="fas fa-times"/>&nbsp;{1}
+                                <i className="fas fa-times"/>&nbsp;{cartItems[key].quantity}
                             </span>
                         </div>
                         <div className="cart__product--price">
@@ -95,7 +51,6 @@ class Header extends React.Component {
 
     render() {
         const numbersOnCart = Object.keys(this.props.cartItems).length
-        console.log("Number Of item on Cart", numbersOnCart)
         return (
             <React.Fragment>
                 <header className="header">
@@ -126,41 +81,11 @@ class Header extends React.Component {
                         </div>
                         <div className="header__user__action">
                             <div className="header__user__action--desktop">
-                                <div className="header__user__action--login nav-action-style">
-                                    <i className="far fa-user icon-style"/>
-                                    <p>
-                                        Login <span className="highlight-text">or</span> Register
-                                    </p>
-                                    <div className="header__user__action--login-form">
-                                        <div className="login__form--header">
-                                            <h1>Sign In</h1>
-                                            <Link to="#">Create an Account</Link>
-                                        </div>
-                                        <form action="#" autoComplete="off">
-                                            <div className="login__form--username">
-                                                <label className="form-label-style" htmlFor="username">Username or
-                                                    email <span
-                                                        className="required">*</span></label>
-                                                <input className="input__radius" type="text" name="username" placeholder="Username"/>
-                                            </div>
-                                            <div className="login__form--password">
-                                                <label className="form-label-style" htmlFor="password">Password <span
-                                                    className="required">*</span></label>
-                                                <input className="input__radius" type="password" name="password" placeholder="Password"/>
-                                            </div>
-                                            <div className="login__form--action">
-                                                <button type="submit">LOGIN</button>
-                                                <span>
-                                        <Link to="#">Lost your password?</Link>
-                                    </span>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                <LoginRegister />
+                                
                                 <div className="header__user__action--wishlist nav-action-style">
                                     <i className="far fa-heart icon-style"/>
                                     <div className="notification">
-                                        {/* <p>{this.props.wishList.length}</p> */}
                                         <p>{0}</p>
                                     </div>
                                 </div>
@@ -178,21 +103,21 @@ class Header extends React.Component {
                                                 <span>Total</span>
                                             </div>
                                             <div className="cart__product__total--price">
-                                                <span>${this.getTotalQuantityAndPrice(1)}</span>
+                                                <span>${this.getTotalQuantityAndPrice()}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="notification">
                                         <p>{numbersOnCart}</p>
                                     </div>
-                                    <span>${this.getTotalQuantityAndPrice(1)}</span>
+                                    <span>${this.getTotalQuantityAndPrice()}</span>
                                 </div>
                             </div>
                             
                         </div>
                     </div>
                     <div className="header__navigation">
-                        <div className="nav__category nav__category__click" onClick={(e) => this.showNavigationLeftMobile(e)}>
+                        <div className="nav__category nav__category__click">
                             <i className="fas fa-bars nav__category__click"/>
                             <p className="nav__category__click">
                                 Shop By Categories

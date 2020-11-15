@@ -31,11 +31,16 @@ class Checkout extends React.Component {
         }
         return 0;
     }
-    handleSubmit = (e)=>{
-        e.preventDefault();
+    callback = ()=>{
         this.props.history.push('/')
     }
+    handleSubmit = (e)=>{
+        e.preventDefault();
+        // this.props.history.push('/')
+        this.props.clearCart(this.callback)
+    }
     render(){
+        console.log(this.props.isLoggedIn)
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
@@ -160,7 +165,11 @@ class Checkout extends React.Component {
                                 <div className="payment-method">
                                     
                                     <div className="order-button-payment">
-                                        <input className="default-btn" type="submit" value="Place order" />
+                                        <input 
+                                            disabled={!this.props.isLoggedIn} 
+                                            className="default-btn" 
+                                            type="submit" 
+                                            value={!this.props.isLoggedIn ? 'You must login first' : 'Place Order'} />
                                     </div>
                                 </div>
                             </div>
