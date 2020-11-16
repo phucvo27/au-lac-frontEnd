@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
-const BASE_URL = 'http://54.254.210.233:1345'
+const BASE_URL = 'https://aulac-api.purplese.com'
 class LoginRegister extends React.Component {
 
     constructor(props){
