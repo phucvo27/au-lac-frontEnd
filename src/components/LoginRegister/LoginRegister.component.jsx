@@ -22,26 +22,27 @@ class LoginRegister extends React.Component {
     }
     handleLogin = async () => {
         const { email, password} = this.state;
-        if(email && password){
-            try {
-                const response = await axios.post(`${BASE_URL}/auth/login`, {email, password});
-                console.log(response);
-                if(response.status === 200){
-                    console.log('login success');
-                    const {jwt, user} = response.data.data;
-                    const customLocalData = {
-                        token: jwt,
-                        name: user.name,
-                        email: user.email,
-                    }
-                    this.props.setUser(customLocalData,this.callback)
-                }
-            }catch (e) {
-                console.log('Something went wrong, Could not Login at this time')
-            }
-        }else {
+        this.props.login(email, password)
+        // if(email && password){
+        //     try {
+        //         const response = await axios.post(`${BASE_URL}/auth/login`, {email, password});
+        //         console.log(response);
+        //         if(response.status === 200){
+        //             console.log('login success');
+        //             const {jwt, user} = response.data.data;
+        //             const customLocalData = {
+        //                 token: jwt,
+        //                 name: user.name,
+        //                 email: user.email,
+        //             }
+        //             this.props.setUser(customLocalData,this.callback)
+        //         }
+        //     }catch (e) {
+        //         console.log('Something went wrong, Could not Login at this time')
+        //     }
+        // }else {
 
-        }
+        // }
     }
     handleLogOut = ()=>{
         this.props.setUser({},this.callback)

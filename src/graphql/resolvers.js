@@ -32,6 +32,7 @@ export const typeDefs = gql`
     SetCurrentUser(user: User!): User!
     RemoveItemFromCart(item: Product!): [Item]!
     ClearItemFromCart(item: Item!): Boolean!
+    Login(email: String!, password: String!)
   }
 `;
 
@@ -180,6 +181,9 @@ export const resolvers = {
       localStorage.setItem('currentUser', JSON.stringify(user))
 
       return user;
+    },
+    Login: (_root, {email, password}, {cache}) => {
+      console.log(email, password)
     }
   }
 };

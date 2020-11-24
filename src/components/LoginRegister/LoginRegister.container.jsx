@@ -9,6 +9,12 @@ const SET_CURRENT_USER = gql`
 
 `;
 
+const LOG_IN = gql`
+    mutation Login($email: String!, $password: String!){
+        Login(email: $email, password: $password)
+    }
+`
+
 // const GET_CURRENT_USER = gql`
 //     query GetCurrentUser {
 //         currentUser @client
@@ -18,7 +24,7 @@ const SET_CURRENT_USER = gql`
 const LoginRegisterContainer = () => {
     const {data, loading} = useQuery(GET_CURRENT_USER);
     const [setCurrentUser] = useMutation(SET_CURRENT_USER);
-
+    const [login] = useMutation(LOG_IN);
     const handleSetUser = (user,cb) => {
         console.log(user);
         setCurrentUser({ variables: { user }}).then(user => {
@@ -26,9 +32,13 @@ const LoginRegisterContainer = () => {
             cb()
         })
     }
+    const handleLogin = (email, password) => {
+        console.log(email, password);
+        login(email, password)
+    }
     if(loading) return <p>Loading..</p>
     const { currentUser } = data;
-    return <LoginRegister setUser={handleSetUser} user={currentUser}/>
+    return <LoginRegister setUser={handleSetUser} login={handleLogin} user={currentUser}/>
 
 }
 
