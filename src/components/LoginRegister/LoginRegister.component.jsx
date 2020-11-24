@@ -111,9 +111,9 @@ class LoginRegister extends React.Component {
             <div className="header__user__action--login nav-action-style">
                 <i className="far fa-user icon-style"/>
                 {
-                    user.name 
+                    user.info 
                         ? <div>
-                                <p>{user.name}</p>
+                                <p>{user.info.name}</p>
                             </div>
                         : <p>
                             Login <span className="highlight-text">or</span> Register

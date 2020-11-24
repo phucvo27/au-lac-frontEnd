@@ -16,6 +16,38 @@ export const typeDefs = gql`
     quantity: Int!
     id: String!
   }
+  extend enum PaymentMethod {
+    cash
+    card
+    cheque
+    bank_transfer
+    other
+  }
+  extend type LoginInput  {
+    email: String!
+    password: String!
+  }
+  extend type SellDetailsInput {
+    product: ID!
+    quantity: Int!
+  }
+  extend type AddressInput {
+    addressNo: String
+    ward: String
+    district: String
+    province: String
+    city: String
+    zipCode: String
+  }
+  extend type CustomerCreateOrderInput {
+    branch: ID!
+    saleRegion: ID!
+    details: [SellDetailsInput!]!
+    shippingAddress: AddressInput!
+    paymentMethod: PaymentMethod!
+    note: String
+    discountCode: String
+  }
   extend type DateTime {
     nanoseconds: Int!
     seconds: Int!
@@ -32,7 +64,6 @@ export const typeDefs = gql`
     SetCurrentUser(user: User!): User!
     RemoveItemFromCart(item: Product!): [Item]!
     ClearItemFromCart(item: Item!): Boolean!
-    Login(email: String!, password: String!)
   }
 `;
 
@@ -182,8 +213,8 @@ export const resolvers = {
 
       return user;
     },
-    Login: (_root, {email, password}, {cache}) => {
-      console.log(email, password)
-    }
+    // Login: (_root, {email, password}, {cache}) => {
+    //   console.log(email, password)
+    // }
   }
 };

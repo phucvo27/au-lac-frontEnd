@@ -6,15 +6,33 @@ import reportWebVitals from './reportWebVitals';
 // Setup GraphQL
 
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 //import { cartItemsVar } from './graphql/cache';
 import { GET_CART_ITEMS } from './graphql/Cart'
 import { typeDefs, resolvers, GET_CURRENT_USER } from './graphql/resolvers'
 const link = createHttpLink({
-    uri: "http://54.254.210.233:1345/graphql"
+    uri: "https://aulac-api.purplese.com/graphql"
 })
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const currentUser = localStorage.getItem('currentUser');
+  let token = undefined;
+  if(currentUser){
+      token = JSON.parse(currentUser).jwt;
+      console.log(token)
+  }
+  // return the headers to the context so httpLink can read them
+  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBjMTQ1MTVjMzEwMWM3MGY0ODYxOCIsImlzQ3VzdG9tZXIiOnRydWUsImlhdCI6MTYwNjE5MDcyMywiZXhwIjoxNjA4NzgyNzIzfQ.XDseGA8QOdzpyxJ-snN0hLNeIFD8LMWWvZaXjAMqBGk"
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `${token}` : "",
+    }
+  }
+});
 const cache = new InMemoryCache();
 const client = new ApolloClient({
-    link,
+    link: authLink.concat(link),
     cache,
     typeDefs,
     resolvers

@@ -8,10 +8,25 @@ const SET_CURRENT_USER = gql`
     }
 
 `;
-
 const LOG_IN = gql`
-    mutation Login($email: String!, $password: String!){
-        Login(email: $email, password: $password)
+    mutation LOG_IN($loginInput: LoginInput!){
+        login(loginInput: $loginInput){
+            jwt
+            user {
+                name
+                email
+                phone
+                address {
+                    ward
+                    district
+                    province
+                    city
+                    zipCode
+                    addressNo
+                }
+            }
+
+        }
     }
 `
 
@@ -34,7 +49,22 @@ const LoginRegisterContainer = () => {
     }
     const handleLogin = (email, password) => {
         console.log(email, password);
-        login(email, password)
+        login({ variables: { loginInput: {email, password} } }).then(res => {
+            console.log("Login Success");
+            const data = res.data.login;
+            const user = {
+                jwt: data.jwt,
+                info: data.user
+            }
+            localStorage.setItem('currentUserTesting', JSON.stringify(user))
+            setCurrentUser({ variables: { user }}).then(user => {
+                console.log('set currentuser successfully');
+            })
+        })
+        .catch(e => {
+            console.log(e)
+            console.log('login fail')
+        })
     }
     if(loading) return <p>Loading..</p>
     const { currentUser } = data;

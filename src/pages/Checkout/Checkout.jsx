@@ -37,7 +37,8 @@ class Checkout extends React.Component {
     handleSubmit = (e)=>{
         e.preventDefault();
         // this.props.history.push('/')
-        this.props.clearCart(this.callback)
+        this.props.checkout()
+        //this.props.clearCart(this.callback)
     }
     render(){
         console.log(this.props.isLoggedIn)
