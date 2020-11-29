@@ -20,7 +20,7 @@ const ProductContainer = (props) => {
     if(error) return <p>we have an error</p>
 
     const { cartItems } = data;
-    const isInCart = cartItems[props.product.id] ? true : false;
+    const isInCart = cartItems[props.product._id] ? true : false;
     console.log(isInCart)
     const handleAdd = (item) => {
         console.log('clicked')

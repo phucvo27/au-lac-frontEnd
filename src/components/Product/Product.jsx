@@ -4,10 +4,11 @@ const Product = (props) => {
     const addToCart = ()=>{
         props.addItem(props.product)
     }
-    const { id, image, name, price} = props.product;
+    const { _id, images, name, salePrice} = props.product;
+    let image = images.length > 0 ? images[0] : 'https://aulacshop.com/uploads/img/1595487543_CHA-BONG-GA--GOI.jpg'
     return (
         <div className="product">
-             <Link to={`/product/${id}`}>
+             <Link to={`/product/${_id}`}>
                 <div className="product__image">
                     <img src={image} alt={name}/>
                 </div>
@@ -27,12 +28,12 @@ const Product = (props) => {
                 </div>
             </div>
             <div className="product__name text-center">
-                <Link to={`/product/${id}`}>
+                <Link to={`/product/${_id}`}>
                     <h5>{name}</h5>
                 </Link>
             </div>
             <div className="product__price text-center">
-                <p>{price}</p>
+                <p>{salePrice}</p>
             </div>
         </div>
     )

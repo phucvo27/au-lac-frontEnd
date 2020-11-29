@@ -9,7 +9,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context';
 //import { cartItemsVar } from './graphql/cache';
 import { GET_CART_ITEMS } from './graphql/Cart'
-import { typeDefs, resolvers, GET_CURRENT_USER } from './graphql/resolvers'
+import { typeDefs, resolvers, GET_CURRENT_USER, GET_REGION } from './graphql/resolvers'
 const link = createHttpLink({
     uri: "https://aulac-api.purplese.com/graphql"
 })
@@ -39,8 +39,10 @@ const client = new ApolloClient({
 })
 let oldCart = localStorage.getItem('cartItems');
 let currentUser = localStorage.getItem('currentUser');
+let oldRegion = localStorage.getItem('region')
 oldCart = oldCart ? JSON.parse(oldCart) : {}
 currentUser = currentUser ? JSON.parse(currentUser) : {}
+oldRegion = oldRegion ? JSON.parse(oldRegion): null
 client.writeQuery({
     query: GET_CART_ITEMS,
     data: {
@@ -51,6 +53,12 @@ client.writeQuery({
   query: GET_CURRENT_USER,
   data: {
     currentUser: currentUser
+  }
+});
+client.writeQuery({
+  query: GET_REGION,
+  data: {
+    region: oldRegion
   }
 })
 

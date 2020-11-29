@@ -106,16 +106,35 @@
   
   .header__offer--location {
     padding-right: 2rem;
-  
+    position: relative;
     i {
       margin-right: .5rem;
     }
+    .location__dropdown {
+      position: absolute;
+      background-color: #fff;
+      top: 100%;
+      left: -3rem;
+      visibility: hidden;
+      opacity: 0;
+      transition: all .4s;
+      z-index: 1000;
+      width: 17rem;
+      p {
+        padding: 1rem 2rem;
+        border-bottom: .1rem solid #ececec;
+        font-size: 1.4rem;
+        cursor: pointer;
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
   }
   
-  .header__offer--location:hover {
-    color: $color-primary;
-    transition: .3s;
-    cursor: pointer;
+  .header__offer--location:hover .location__dropdown{
+    visibility: visible;
+    opacity: 1;
   }
   /*================END Offer SECTION=================*/
   

@@ -30,7 +30,7 @@ const Table = (props) => {
     const renderTotalPrice = () => {
         if(cart.length > 0){
             return cart.reduce((accum, current)=>{
-                return accum = accum + (cartItems[current].price * cartItems[current].quantity)
+                return accum = accum + (cartItems[current].salePrice * cartItems[current].quantity)
             }, 0)
         }
         return 0;

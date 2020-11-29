@@ -3,6 +3,73 @@ import { withRouter } from 'react-router-dom'
 
 class Checkout extends React.Component {
 
+    constructor(props){
+        super(props);
+        
+        this.state = {
+            firstName: '',
+            lastName: '',
+            shippingAddress: {
+                addressNo:"",
+                ward:"",
+                district: "",
+                province:"",
+                city:"",
+                zipCode: "",
+            },
+            note: '',
+            phone: '',
+            email: ''
+
+        }
+    }
+    componentDidMount(){
+        console.log('ok, im on checkout page, here is my data after login');
+        console.log(this.props);
+        if(this.props.isLoggedIn) {
+            // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const { name, address, email, phone } = this.props.currentUser.info;
+            // const { name, address, email, phone } = currentUser.info;
+            const { addressNo, ward, district, city } = address;
+            const fullName = name.split(' ');
+            console.log(email)
+            let firstName = fullName[fullName.length - 1];
+            let lastName = '';
+            for(let i = 0; i < (fullName.length - 1); i++){
+                lastName += `${fullName[i]} `;
+            }
+
+            this.setState((prevState)=>({
+                firstName,
+                lastName,
+                shippingAddress: {
+                    ...prevState.shippingAddress,
+                    addressNo: addressNo ? addressNo : '',
+                    ward: ward ? ward : '',
+                    district: district ? district : '',
+                    city: city ? city : ''
+                },
+                phone: phone ? phone : '',
+                email
+            }))
+        }
+    }
+    handleChange = e => {
+        const { name, value } = e.target;
+        
+        if(typeof this.state[name] === 'string'){
+            this.setState(()=>({[name]: value}))
+        }else {
+            this.setState( prevState => {
+                return {
+                    shippingAddress: {
+                        ...prevState.shippingAddress,
+                        [name]: value
+                    }
+                }
+            })
+        }
+    }
     renderOrderBody = () => {
         const { cartItems } = this.props;
         const cart = cartItems ? Object.keys(cartItems) : [];
@@ -34,14 +101,26 @@ class Checkout extends React.Component {
     callback = ()=>{
         this.props.history.push('/')
     }
+    // handleSelect = value => {
+
+    // }
     handleSubmit = (e)=>{
         e.preventDefault();
+        console.log(this.state)
+        const { firstName, lastName, shippingAddress, note } = this.state;
         // this.props.history.push('/')
-        this.props.checkout()
+        this.props.checkout({
+            firstName,
+            lastName,
+            shippingAddress,
+            note
+        })
         //this.props.clearCart(this.callback)
     }
     render(){
-        console.log(this.props.isLoggedIn)
+        console.log(this.props.isLoggedIn);
+        const { firstName, lastName, shippingAddress, note, email, phone } = this.state;
+        const { addressNo, ward, district,city } = shippingAddress;
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
@@ -49,65 +128,55 @@ class Checkout extends React.Component {
                         <div className="left__content">
                             <div className="checkbox-form">						
                                 <h3>Thông Tin Đơn Hàng</h3>
-                                <div className="row">
-                                    <div className="country-select">
-                                        <label>Country <span className="required">*</span></label>
-                                        <select>
-                                            <option value="volvo">TPHCM</option>
-                                            <option value="saab">Hà Nội</option>
-                                            <option value="mercedes">Đà Nẵng</option>
-                                            <option value="audi">Cần Thơ</option>
-                                        </select> 										
-                                    </div>
-                                </div>
+                                
                                 <div className="half__row">
                                     <div className="checkout-form-list">
                                         <label>First Name <span className="required">*</span></label>	
-                                        <input type="text" placeholder="" />
+                                        <input onChange={this.handleChange} value={firstName} name="firstName" type="text" placeholder="" />
                                     </div>
                                     <div className="checkout-form-list">
                                         <label>Last Name <span className="required">*</span></label>	
-                                        <input type="text" placeholder="" />
+                                        <input onChange={this.handleChange} value={lastName} name="lastName" type="text" placeholder="" />
                                     </div>
                                 </div>
                                 
                                 <div className="row">
                                     <div className="checkout-form-list">
                                         <label>Địa chỉ <span className="required">*</span></label>
-                                        <input type="text" placeholder="Street address" />
+                                        <input onChange={this.handleChange} value={addressNo} name="addressNo" type="text" placeholder="Street address" />
                                     </div>
                                 </div>
-                                <div className="row">
+                                {/* <div className="row">
                                     <div className="checkout-form-list">									
                                         <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="row">
                                     <div className="checkout-form-list">
                                         <label>Thành Phố <span className="required">*</span></label>
-                                        <input type="text" placeholder="Thành Phố" />
+                                        <input onChange={this.handleChange} value={city} name="city" type="text" placeholder="Thành Phố" />
                                     </div>
                                 </div>
                                 <div className="half__row">
                                     <div className="checkout-form-list">
                                         <label>Quận/Huyện <span className="required">*</span></label>
-                                        <input type="text" placeholder="Quận/Huyện" />
+                                        <input onChange={this.handleChange} value={district} name="district" type="text" placeholder="Quận/Huyện" />
                                     </div>
                                     <div className="checkout-form-list">
                                         <label>Phường/Xã <span className="required">*</span></label>
-                                        <input type="text" placeholder="Phường/Xã" />
+                                        <input onChange={this.handleChange} value={ward} name="ward" type="text" placeholder="Phường/Xã" />
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="checkout-form-list">
                                         <label>Email <span className="required">*</span></label>
-                                        <input type="email" placeholder="" />
+                                        <input name="email" value={email} type="email" placeholder="" />
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="checkout-form-list">
                                         <label>Phone  <span className="required">*</span></label>	
-                                        <input type="text" placeholder="Phone" />
+                                        <input name="phone" value={phone} onChange={this.handleChange} type="text" placeholder="Phone" />
                                     </div>
                                 </div>
                                 					
@@ -116,7 +185,7 @@ class Checkout extends React.Component {
                                     <div className="order-notes">
                                         <div className="checkout-form-list">
                                             <label>Order Notes</label>
-                                            <textarea id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery." ></textarea>
+                                            <textarea onChange={this.handleChange} value={note} name="note" id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery." ></textarea>
                                         </div>									
                                     </div>
                                 </div>													

@@ -32,7 +32,7 @@ const WrappCheckLogin = () => {
 
     const { currentUser } = data;
     const isLoggedIn = Object.keys(currentUser).length > 0;
-    return <CheckoutContainer isLoggedIn={isLoggedIn} />
+    return <CheckoutContainer isLoggedIn={isLoggedIn} currentUser={currentUser} />
 
 }
 
@@ -65,8 +65,13 @@ const CheckoutContainer = (props) => {
             cb()
         })
     }
-    const handleCheckout = () => {
-        checkout({variables: {customerCreateOrderInput: dataCheckout}}).then(res => {
+    const handleCheckout = (data) => {
+        const requestData = {
+            ...dataCheckout,
+            
+        }
+        console.log(requestData)
+        checkout({variables: {customerCreateOrderInput: requestData}}).then(res => {
             console.log('Create order success');
             console.log(res)
         })

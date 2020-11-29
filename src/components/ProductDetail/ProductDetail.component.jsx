@@ -29,10 +29,10 @@ class ProductDetail extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0,0);
-        const id = this.props.match.params.id;
-        const currentProduct = fakeData.find(p => p.id === id);
-        console.log(currentProduct)
-        this.setState(()=>({product: currentProduct}))
+        // const id = this.props.match.params.id;
+        // const currentProduct = fakeData.find(p => p.id === id);
+        // console.log(currentProduct)
+        this.setState(()=>({product: this.props.product}))
     }
 
     increaseQuantity = ()=>{
@@ -126,16 +126,17 @@ class ProductDetail extends React.Component {
         // cart = []
         // productCart = []
         const { product } = this.props;
+        let image = product.images.length > 0 ? product.images[0] : 'https://aulacshop.com/uploads/img/1595487543_CHA-BONG-GA--GOI.jpg'
         return (
             <div className="content__quantity--item">
                 <div className="quantity__item__img">
-                    <img src={product.image} alt={`Quantity 1`}/>
+                    <img src={image} alt={`Quantity 1`}/>
                 </div>
                 <div className="quantity__item__name">
                     <Link to="#">{product.name}</Link>
                 </div>
                 <div className="quantity__item__price">
-                    <span>{product.price}đ</span>
+                    <span>{product.salePrice}đ</span>
                 </div>
                 <div className="quantity__item__action">
                     <span
@@ -206,12 +207,14 @@ class ProductDetail extends React.Component {
         const { updateQuantity} = this.state;
         // this.props.cart = []
         const { product } = this.props
+        //return <p>testing hahaha...</p>
+        let image = product.images.length > 0 ? product.images[0] : 'https://aulacshop.com/uploads/img/1595487543_CHA-BONG-GA--GOI.jpg'
         return (
             <div className="product-detail__container">
                 <div className="product-detail__image">
                     <div className="product-detail__image--img">
                         {/* <img src={product.image} alt="Product Detail"/> */}
-                        <img src={product.image} alt="Product Detail"/>
+                        <img src={image} alt="Product Detail"/>
                     </div>
                     <div className="product-detail__image--img-slider">
                         {this.renderImageSlider()}
@@ -224,7 +227,7 @@ class ProductDetail extends React.Component {
                         </div>
                         <div className="product-detail__content__rating" style={{display: 'none'}}/>
                         <div className="product-detail__content__price">
-                            <span>{product.price}đ</span>
+                            <span>{product.salePrice}đ</span>
                         </div>
                         <div className="product-detail__content__description">
                             <p>
@@ -256,14 +259,10 @@ class ProductDetail extends React.Component {
                         <div className="content--quantity--tag">
                             <div className="quantity__tag__category">
                                 <p>
-                                    Categories: <span>{product.category}</span>
+                                    Categories: <span>{product.category.name}</span>
                                 </p>
                             </div>
-                            <div className="quantity__tag">
-                                <p>
-                                    Tags: <span>Clothing</span>, <span>Glasses</span>
-                                </p>
-                            </div>
+                            
                         </div>
                         <div className="content--quantity--social">
                             <span className="social__facebook">

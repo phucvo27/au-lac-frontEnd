@@ -1,7 +1,7 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   return {
       ...cartItems, 
-      [cartItemToAdd.id]: { 
+      [cartItemToAdd._id]: { 
         ...cartItemToAdd, 
         quantity: cartItemToAdd.quantity > 1 ? cartItemToAdd.quantity : 1 
       }
@@ -10,8 +10,8 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 export const updateItemOnCart = (cartItems, cartItemToAdd) => {
   return {
     ...cartItems, 
-    [cartItemToAdd.id]: {
-        ...cartItems[cartItemToAdd.id], 
+    [cartItemToAdd._id]: {
+        ...cartItems[cartItemToAdd._id], 
         quantity: cartItemToAdd.quantity
       }
     }
@@ -20,7 +20,7 @@ export const removeItemFromCart = (cartItems = {}, cartItemToRemove) => {
     const cart = Object.keys(cartItems);
     let result = {};
     cart.forEach(key => {
-      if(key !== cartItemToRemove.id){
+      if(key !== cartItemToRemove._id){
         result[key] = cartItems[key]
       }
     })
@@ -51,4 +51,4 @@ export const getCartTotal = (cartItems = {})=>{
 }
 
 export const clearItemFromCart = (cartItems, item) =>
-  cartItems.filter(cartItem => cartItem.id !== item.id);
+  cartItems.filter(cartItem => cartItem._id !== item._id);

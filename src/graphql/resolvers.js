@@ -57,6 +57,11 @@ export const typeDefs = gql`
     email: String!
     token: String!
   }
+  extend type SaleRegion {
+    _id: ID!
+    name: String!
+  }
+  
   extend type Mutation {
     ToggleCartHidden: Boolean!
     AddItemToCart(item: Product!): Boolean!
@@ -64,6 +69,7 @@ export const typeDefs = gql`
     SetCurrentUser(user: User!): User!
     RemoveItemFromCart(item: Product!): [Item]!
     ClearItemFromCart(item: Item!): Boolean!
+    ChooseRegion(region: SaleRegion!): Boolean!
   }
 `;
 
@@ -72,7 +78,11 @@ const GET_CART_HIDDEN = gql`
     cartHidden @client
   }
 `;
-
+export const GET_REGION = gql`
+  {
+    region @client
+  }
+`;
 const GET_ITEM_COUNT = gql`
   {
     itemCount @client
@@ -213,6 +223,16 @@ export const resolvers = {
 
       return user;
     },
+
+    ChooseRegion: (_root, {region}, {cache}) => {
+      console.log("im in ChooseRegion resolvers");
+      console.log(region)
+      cache.writeQuery({
+        query: GET_REGION,
+        data: { region }
+      });
+      localStorage.setItem('region', JSON.stringify(region))
+    }
     // Login: (_root, {email, password}, {cache}) => {
     //   console.log(email, password)
     // }

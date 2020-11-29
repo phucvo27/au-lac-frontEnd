@@ -16,7 +16,7 @@ class Header extends React.Component {
         const cart = Object.keys(cartItems);
         if(cart.length > 0){
             return cart.reduce((accum, current)=>{
-                return accum = accum + (cartItems[current].price * cartItems[current].quantity)
+                return accum = accum + (cartItems[current].salePrice * cartItems[current].quantity)
             }, 0)
         }
         return 0;
@@ -48,9 +48,20 @@ class Header extends React.Component {
             })
             : <div className="cart__checkout__info"/>
     }
+    renderSaleRegions = ()=>{
+        const { saleRegions } = this.props;
+        if(saleRegions){
+            return saleRegions.map(region => <p onClick={()=>{this.handleChooseRegion(region)}} key={region._id}>{region.name}</p>)
+        }
+    }
+    handleChooseRegion = region => {
+        console.log(region)
+        this.props.chooseRegion(region);
+    }
 
     render() {
-        const numbersOnCart = Object.keys(this.props.cartItems).length
+        const numbersOnCart = Object.keys(this.props.cartItems).length;
+        console.log(this.props.region)
         return (
             <React.Fragment>
                 <header className="header">
@@ -63,7 +74,10 @@ class Header extends React.Component {
                         </div>
                         <div className="header__offer--location">
                             <i className="fas fa-map-marker-alt"/>
-                            <span>Store location</span>
+                            <span>Store location: {this.props.region.name}</span>
+                            <div className="location__dropdown">
+                                {this.renderSaleRegions()}
+                            </div>
                         </div>
                     </div>
                     <div className="header__user">
