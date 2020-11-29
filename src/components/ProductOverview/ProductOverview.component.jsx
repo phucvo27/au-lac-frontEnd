@@ -3,7 +3,7 @@ import Product from '../Product/Product.container.jsx';
 
 
 const ProductOverview = ({ category, products }) => {
-    const { name, _id } = category;
+    const { name } = category;
 
     const renderProducts = () =>{
         return products.map(product => <Product product={product} key={product._id} />)

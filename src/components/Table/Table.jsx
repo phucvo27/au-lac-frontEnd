@@ -7,7 +7,11 @@ const Table = (props) => {
     const renderTableContent = () =>{
         if(cart.length > 0 ){
             return cart.map(key => ( 
-                <TableRow key={key} product={cartItems[key]} update={props.update} remove={props.remove} />
+                <TableRow 
+                    key={key} 
+                    product={cartItems[key]} 
+                    update={props.update} 
+                    remove={props.remove} />
                 // <tr key={key}>
                 //     <td className="table-remove">
                 //         <button onClick={()=> {props.remove(cartItems[key])}}>

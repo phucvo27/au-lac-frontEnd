@@ -4,7 +4,6 @@ import {
     useQuery,
     useMutation
 } from '@apollo/client';
-import fakeData from '../../data/fake-data.js';
 import ProductDetail from './ProductDetail.component.jsx';
 import { flowRight } from 'lodash';
 import { graphql } from '@apollo/client/react/hoc';

@@ -1,6 +1,6 @@
 import React from "react";
 import ProductsHeader from '../../components/ProductsHeader/ProductsHeader.component.jsx'
-import ProductsCategory from '../../components/ProductsCategory/ProductsCategory.component.jsx'
+import ProductsCategory from '../../components/ProductsCategory/ProductCategory.container.js'
 import ProductDetail from '../../components/ProductDetail/ProductDetail.container.jsx'
 import ProductDetailDescription from '../../components/ProductDetailDescription/ProductDetailDescription.component.jsx'
 const ProductDetails = (props) => {

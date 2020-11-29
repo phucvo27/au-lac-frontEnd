@@ -40,7 +40,7 @@ class Header extends React.Component {
                         </div>
                         <div className="cart__product--price">
                             <span>
-                                ${cartItems[key].price}
+                                ${cartItems[key].salePrice}
                             </span>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ class Header extends React.Component {
                         </div>
                         <div className="header__offer--location">
                             <i className="fas fa-map-marker-alt"/>
-                            <span>Store location: {this.props.region.name}</span>
+                            <span>Store location: {this.props.region && this.props.region.name}</span>
                             <div className="location__dropdown">
                                 {this.renderSaleRegions()}
                             </div>

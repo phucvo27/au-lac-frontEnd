@@ -1,7 +1,5 @@
 import React from 'react';
-import Product from '../../components/Product/Product.container.jsx';
 import HomeSlider from '../../components/HomeSlider/HomeSlider.jsx';
-import fakeData from '../../data/fake-data';
 import ProductOverviewContainer from '../../components/ProductOverview/ProductOverview.container.js';
 
 const Home = (props) => {

@@ -63,12 +63,12 @@ class TableRow extends React.Component {
                     </button>
                 </td>
                 <td className="table-image">
-                    <Link to={`/product/${product.id}`}>
+                    <Link to={`/product/${product._id}`}>
                         <img src={product.image} alt={product.name} />
                     </Link>
                 </td>
                 <td className="table-p-name"><Link to={`/product/${product.id}`}>{product.name}</Link></td>
-                <td className="table-p-price"><p>{product.price}đ</p></td>
+                <td className="table-p-price"><p>{product.salePrice}đ</p></td>
                 <td className="table-p-qty">
                     <div className="table__actions">
                         <button className={this.state.isModified ? 'btn btn-cancel active': 'btn'} onClick={this.cancel}>
@@ -84,7 +84,7 @@ class TableRow extends React.Component {
                         </button>
                     </div>
                 </td>
-                <td className="table-total"><p>{(product.price * product.quantity)}đ</p></td>
+                <td className="table-total"><p>{(product.salePrice * product.quantity)}đ</p></td>
             </tr>
         )
     }

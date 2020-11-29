@@ -1,9 +1,10 @@
 import React from "react";
 import ProductsHeader from '../../components/ProductsHeader/ProductsHeader.component.jsx'
-import ProductsCategory from '../../components/ProductsCategory/ProductsCategory.component.jsx'
-import ProductsList from '../../components/ProductsList/ProducsList.component.jsx'
+import ProductsCategory from '../../components/ProductsCategory/ProductCategory.container.js'
+import ProductsList from '../../components/ProductsList/ProductList.container.js'
 const Products = (props) => {
-
+    console.log(props.match.params.cateId)
+    const categoryID = props.match.params.cateId;
     return (
         <div className="products__container">
             <div className="products__header">
@@ -15,7 +16,7 @@ const Products = (props) => {
                     {/* <ProductsOnSale/> */}
                 </div>
                 <div className="products__body__right">
-                    <ProductsList />
+                    <ProductsList categoryID={categoryID} />
                 </div>
             </div>
         </div>

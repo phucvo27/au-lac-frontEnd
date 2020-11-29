@@ -11,6 +11,7 @@ const ADD_ITEM_TO_CART = gql`
 const GET_CART_ITEMS = gql` 
     query GetCartItems {
         cartItems @client
+        region @client
     }
 `;
 const ProductContainer = (props) => {
@@ -19,7 +20,7 @@ const ProductContainer = (props) => {
     if(loading) return <p>loading...</p>
     if(error) return <p>we have an error</p>
 
-    const { cartItems } = data;
+    const { cartItems, region } = data;
     const isInCart = cartItems[props.product._id] ? true : false;
     console.log(isInCart)
     const handleAdd = (item) => {
@@ -41,7 +42,7 @@ const ProductContainer = (props) => {
         })
     }
 
-    return <Product {...props} addItem={handleAdd} isInCart={isInCart} />
+    return <Product {...props} region={region} addItem={handleAdd} isInCart={isInCart} />
 }
 
 export default ProductContainer

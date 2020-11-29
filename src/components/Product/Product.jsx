@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { transformProductObject } from '../../graphql/utils.js';
 const Product = (props) => {
+    
+   
+    //const idRegion = props.region ? props.region._id : ''
+    let productCustom = transformProductObject(props.product, props.region);
+    console.log("================= im in Product ===================")
+    console.log(`Old Prices: ${props.product.salePrice}, new prices: ${productCustom.salePrice}`)
+    const { _id, images, name, salePrice} = productCustom;
+
     const addToCart = ()=>{
-        props.addItem(props.product)
+        props.addItem(productCustom)
     }
-    const { _id, images, name, salePrice} = props.product;
     let image = images.length > 0 ? images[0] : 'https://aulacshop.com/uploads/img/1595487543_CHA-BONG-GA--GOI.jpg'
     return (
         <div className="product">

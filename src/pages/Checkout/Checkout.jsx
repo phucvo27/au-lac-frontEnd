@@ -81,7 +81,7 @@ class Checkout extends React.Component {
                             {cartItems[key].name} <strong className="product-quantity"> × {cartItems[key].quantity}</strong>
                         </td>
                         <td className="product-total">
-                            <span className="amount">{(cartItems[key].price * cartItems[key].quantity)}đ</span>
+                            <span className="amount">{(cartItems[key].salePrice * cartItems[key].quantity)}đ</span>
                         </td>
                     </tr>
                 )
@@ -93,7 +93,7 @@ class Checkout extends React.Component {
         const cart = cartItems ? Object.keys(cartItems) : [];
         if(cart.length > 0){
             return cart.reduce((accum, current)=>{
-                return accum = accum + (cartItems[current].price * cartItems[current].quantity)
+                return accum = accum + (cartItems[current].salePrice * cartItems[current].quantity)
             }, 0)
         }
         return 0;

@@ -121,7 +121,7 @@ class ProductsList extends React.Component {
     }
 
     renderProductList = () => {
-        const {products} = this.state;
+        const {products} = this.props;
 
         return products.map((p, idx) => {
             return <Product key={idx} product={p}/>

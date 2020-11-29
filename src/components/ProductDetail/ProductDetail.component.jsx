@@ -6,7 +6,6 @@ import productImg_1 from './../../assets/products/seafood-1.jpg';
 import productImg_2 from './../../assets/products/seafood-2.jpg';
 import productImg_3 from './../../assets/products/seafood-3.jpg';
 import {Link, withRouter} from "react-router-dom";
-import fakeData from '../../data/fake-data'
 //import productImg_4 from './../../assets/products/seafood-4.jpg';
 
 class ProductDetail extends React.Component {
@@ -206,7 +205,8 @@ class ProductDetail extends React.Component {
     render() {
         const { updateQuantity} = this.state;
         // this.props.cart = []
-        const { product } = this.props
+        const { product } = this.props;
+        console.log(product)
         //return <p>testing hahaha...</p>
         let image = product.images.length > 0 ? product.images[0] : 'https://aulacshop.com/uploads/img/1595487543_CHA-BONG-GA--GOI.jpg'
         return (
@@ -259,7 +259,7 @@ class ProductDetail extends React.Component {
                         <div className="content--quantity--tag">
                             <div className="quantity__tag__category">
                                 <p>
-                                    Categories: <span>{product.category.name}</span>
+                                    Categories: <span>{product.category && product.category.name}</span>
                                 </p>
                             </div>
                             
