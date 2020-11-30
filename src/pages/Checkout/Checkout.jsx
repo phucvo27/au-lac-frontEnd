@@ -19,12 +19,12 @@ class Checkout extends React.Component {
             },
             note: '',
             phone: '',
-            email: ''
+            email: '',
+            isCod: true
 
         }
     }
     componentDidMount(){
-        console.log('ok, im on checkout page, here is my data after login');
         console.log(this.props);
         if(this.props.isLoggedIn) {
             // const currentUser = JSON.parse(localStorage.getItem('currentUser'));

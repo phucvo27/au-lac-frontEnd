@@ -6,6 +6,7 @@ import { GET_CURRENT_USER } from '../../graphql/resolvers'
 const GET_CART_ITEMS = gql` 
     query GetCartItems {
         cartItems @client
+        region @client
     }
 `;
 // const ADD_ITEM_TO_CART = gql`
@@ -44,9 +45,10 @@ const CheckoutContainer = (props) => {
     //const cartItems = useReactiveVar(cartItemsVar);
     // console.log(cartItems)
     if(loading) return <p>Loading...</p>
+    const { cartItems, region } = data;
     const dataCheckout = {
-        branch: "5faa75d53452561a3f6463c9",
-        saleRegion: "5faa75e53452561a3f6463cf",
+        branch: "5fbcdd761cd9506c820a3687",
+        saleRegion: "5faa75e53452561a3f6463d1",
         details: {product: "5faa75f83452561a3f64645e", quantity: 1},
         shippingAddress: {
           addressNo:"empty",
@@ -80,7 +82,7 @@ const CheckoutContainer = (props) => {
             console.log(e)
         })
     }
-    const { cartItems } = data;
+    
     return <Checkout {...props} cartItems={cartItems} checkout={handleCheckout} clearCart={handleClearCart} />
 }
 

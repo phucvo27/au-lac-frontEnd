@@ -21,28 +21,31 @@ const ProductContainer = (props) => {
     if(error) return <p>we have an error</p>
 
     const { cartItems, region } = data;
-    const isInCart = cartItems[props.product._id] ? true : false;
-    console.log(isInCart)
-    const handleAdd = (item) => {
-        console.log('clicked')
-        addItem({variables: {item}}).then(()=>{
-            
-            const {cartItems} = client.readQuery({
-                query: GET_CART_ITEMS
+    if(cartItems && region){
+        const isInCart = cartItems[props.product._id] ? true : false;
+        console.log(isInCart)
+        const handleAdd = (item) => {
+            console.log('clicked')
+            addItem({variables: {item}}).then(()=>{
+                
+                const {cartItems} = client.readQuery({
+                    query: GET_CART_ITEMS
+                })
+                const newCart = addItemToCart(cartItems, item)
+                console.log(newCart)
+                localStorage.setItem('cartItems', JSON.stringify(newCart))
+                client.writeQuery({
+                    query: GET_CART_ITEMS,
+                    data: {
+                        cartItems: newCart
+                    }
+                })
             })
-            const newCart = addItemToCart(cartItems, item)
-            console.log(newCart)
-            localStorage.setItem('cartItems', JSON.stringify(newCart))
-            client.writeQuery({
-                query: GET_CART_ITEMS,
-                data: {
-                    cartItems: newCart
-                }
-            })
-        })
-    }
+        }
 
-    return <Product {...props} region={region} addItem={handleAdd} isInCart={isInCart} />
+        return <Product {...props} region={region} addItem={handleAdd} isInCart={isInCart} />
+    }
+    return <p>Loading</p>
 }
 
 export default ProductContainer

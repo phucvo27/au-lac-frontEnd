@@ -8,6 +8,13 @@ const LIST_SALE_REGIONS = gql`
         listSaleRegions {
             _id
             name
+            branches {
+                _id
+                name
+                address {
+                    addressNo
+                    }
+            }
         }
     }
 `;
