@@ -70,9 +70,9 @@ const CheckoutContainer = (props) => {
     const handleCheckout = (data) => {
         const requestData = {
             ...dataCheckout,
-            
+            ...data
         }
-        console.log(requestData)
+        //console.log(requestData)
         checkout({variables: {customerCreateOrderInput: requestData}}).then(res => {
             console.log('Create order success');
             console.log(res)

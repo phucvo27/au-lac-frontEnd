@@ -109,11 +109,24 @@ class Checkout extends React.Component {
         console.log(this.state)
         const { firstName, lastName, shippingAddress, note } = this.state;
         // this.props.history.push('/')
+        const details = [];
+        const { cartItems } = this.props;
+        const cart = cartItems ? Object.keys(cartItems) : [];
+        if(cart.length > 0){
+            for(let i = 0; i < cart.length; i++){
+                details.push({
+                    product: cart[i],
+                    quantity: cartItems[cart[i]].quantity
+                })
+            }
+        }
+        // console.log(details)
         this.props.checkout({
             firstName,
             lastName,
             shippingAddress,
-            note
+            note,
+            details
         })
         //this.props.clearCart(this.callback)
     }
